@@ -7745,7 +7745,7 @@ jQuery.speed = function( speed, easing, fn ) {
 };
 
 jQuery.fn.extend( {
-	fadeTo: function( speed, to, easing, callback ) {
+	fMenuAdeto: function( speed, to, easing, callback ) {
 
 		// Show any hidden elements after setting opacity to 0
 		return this.filter( isHiddenWithinTree ).css( "opacity", 0 ).show()
@@ -7884,7 +7884,7 @@ jQuery.each( {
 	slideToggle: genFx( "toggle" ),
 	fadeIn: { opacity: "show" },
 	fadeOut: { opacity: "hide" },
-	fadeToggle: { opacity: "toggle" }
+	fMenuAdetoggle: { opacity: "toggle" }
 }, function( name, props ) {
 	jQuery.fn[ name ] = function( speed, easing, callback ) {
 		return this.animate( props, speed, easing, callback );
