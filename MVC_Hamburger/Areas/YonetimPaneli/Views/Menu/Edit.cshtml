@@ -1,27 +1,23 @@
 ﻿@model MVC_Hamburger.Models.Concrete.Menu
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
 <h4>Menu</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ResimYolu" class="control-label"></label>
                 <input asp-for="ResimYolu" class="form-control" />
                 <span asp-validation-for="ResimYolu" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Boy" class="control-label"></label>
-                <select asp-for="Boy" class="form-control"></select>
-                <span asp-validation-for="Boy" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="ID" />
             <div class="form-group">
                 <label asp-for="Ad" class="control-label"></label>
                 <input asp-for="Ad" class="form-control" />
@@ -33,12 +29,7 @@
                 <span asp-validation-for="Fiyat" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MenuAdet" class="control-label"></label>
-                <input asp-for="MenuAdet" class="form-control" />
-                <span asp-validation-for="MenuAdet" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

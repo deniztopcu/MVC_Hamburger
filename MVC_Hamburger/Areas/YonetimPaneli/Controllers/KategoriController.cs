@@ -13,24 +13,23 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
 {
     [Authorize(Roles = "Yonetici")]
     [Area("YonetimPaneli")]
-  
-    public class EkstraMalzemeController : Controller
+    
+    public class KategoriController : Controller
     {
         private readonly HamburgerDbContext _context;
 
-        public EkstraMalzemeController(HamburgerDbContext context)
+        public KategoriController(HamburgerDbContext context)
         {
             _context = context;
         }
 
-        // GET: YonetimPaneli/EkstraMalzeme
+        // GET: YonetimPaneli/Kategori
         public async Task<IActionResult> Index()
         {
-            var hamburgerDbContext = _context.EkstraMalzemeler.Include(e => e.Kategori);
-            return View(await hamburgerDbContext.ToListAsync());
+            return View(await _context.Kategoriler.ToListAsync());
         }
 
-        // GET: YonetimPaneli/EkstraMalzeme/Details/5
+        // GET: YonetimPaneli/Kategori/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,42 +37,39 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
                 return NotFound();
             }
 
-            var ekstraMalzeme = await _context.EkstraMalzemeler
-                .Include(e => e.Kategori)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (ekstraMalzeme == null)
+            var kategori = await _context.Kategoriler
+                .FirstOrDefaultAsync(m => m.KategoriID == id);
+            if (kategori == null)
             {
                 return NotFound();
             }
 
-            return View(ekstraMalzeme);
+            return View(kategori);
         }
 
-        // GET: YonetimPaneli/EkstraMalzeme/Create
+        // GET: YonetimPaneli/Kategori/Create
         public IActionResult Create()
         {
-            ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriID");
             return View();
         }
 
-        // POST: YonetimPaneli/EkstraMalzeme/Create
+        // POST: YonetimPaneli/Kategori/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("KategoriID,ID,Ad,Fiyat")] EkstraMalzeme ekstraMalzeme)
+        public async Task<IActionResult> Create([Bind("KategoriID,KategoriAdi")] Kategori kategori)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ekstraMalzeme);
+                _context.Add(kategori);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriID", ekstraMalzeme.KategoriID);
-            return View(ekstraMalzeme);
+            return View(kategori);
         }
 
-        // GET: YonetimPaneli/EkstraMalzeme/Edit/5
+        // GET: YonetimPaneli/Kategori/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,23 +77,22 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
                 return NotFound();
             }
 
-            var ekstraMalzeme = await _context.EkstraMalzemeler.FindAsync(id);
-            if (ekstraMalzeme == null)
+            var kategori = await _context.Kategoriler.FindAsync(id);
+            if (kategori == null)
             {
                 return NotFound();
             }
-            ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriID", ekstraMalzeme.KategoriID);
-            return View(ekstraMalzeme);
+            return View(kategori);
         }
 
-        // POST: YonetimPaneli/EkstraMalzeme/Edit/5
+        // POST: YonetimPaneli/Kategori/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("KategoriID,ID,Ad,Fiyat")] EkstraMalzeme ekstraMalzeme)
+        public async Task<IActionResult> Edit(int id, [Bind("KategoriID,KategoriAdi")] Kategori kategori)
         {
-            if (id != ekstraMalzeme.ID)
+            if (id != kategori.KategoriID)
             {
                 return NotFound();
             }
@@ -106,12 +101,12 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
             {
                 try
                 {
-                    _context.Update(ekstraMalzeme);
+                    _context.Update(kategori);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EkstraMalzemeExists(ekstraMalzeme.ID))
+                    if (!KategoriExists(kategori.KategoriID))
                     {
                         return NotFound();
                     }
@@ -122,11 +117,10 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriID", ekstraMalzeme.KategoriID);
-            return View(ekstraMalzeme);
+            return View(kategori);
         }
 
-        // GET: YonetimPaneli/EkstraMalzeme/Delete/5
+        // GET: YonetimPaneli/Kategori/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,35 +128,34 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
                 return NotFound();
             }
 
-            var ekstraMalzeme = await _context.EkstraMalzemeler
-                .Include(e => e.Kategori)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (ekstraMalzeme == null)
+            var kategori = await _context.Kategoriler
+                .FirstOrDefaultAsync(m => m.KategoriID == id);
+            if (kategori == null)
             {
                 return NotFound();
             }
 
-            return View(ekstraMalzeme);
+            return View(kategori);
         }
 
-        // POST: YonetimPaneli/EkstraMalzeme/Delete/5
+        // POST: YonetimPaneli/Kategori/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ekstraMalzeme = await _context.EkstraMalzemeler.FindAsync(id);
-            if (ekstraMalzeme != null)
+            var kategori = await _context.Kategoriler.FindAsync(id);
+            if (kategori != null)
             {
-                _context.EkstraMalzemeler.Remove(ekstraMalzeme);
+                _context.Kategoriler.Remove(kategori);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EkstraMalzemeExists(int id)
+        private bool KategoriExists(int id)
         {
-            return _context.EkstraMalzemeler.Any(e => e.ID == id);
+            return _context.Kategoriler.Any(e => e.KategoriID == id);
         }
     }
 }

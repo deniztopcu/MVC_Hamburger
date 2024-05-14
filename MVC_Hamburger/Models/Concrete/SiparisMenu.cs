@@ -7,5 +7,7 @@
         public int MenuID { get; set; }
         public Menu? Menu { get; set; }
 
+        public int MenuAdedi { get; set; }
+
     }
 }

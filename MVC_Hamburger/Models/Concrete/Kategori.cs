@@ -4,6 +4,6 @@
     {
         public int KategoriID { get; set; }
         public string KategoriAdi { get; set; }
-        public List<EkstraMalzeme>? EkstraMalzemeler { get; set; }
+        public ICollection<EkstraMalzeme>? EkstraMalzemeler { get; set; }
     }
 }

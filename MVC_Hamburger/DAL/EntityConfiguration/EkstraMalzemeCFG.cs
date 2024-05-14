@@ -13,8 +13,9 @@ namespace MVC_Hamburger.DAL.EntityConfiguration
             builder.Property(x => x.Fiyat).HasColumnType("money");
             builder.HasOne(x => x.Kategori).WithMany(x => x.EkstraMalzemeler).HasForeignKey(x => x.KategoriID);
             builder.HasData(
-                new EkstraMalzeme() { ID=1, Ad="ketçap", Fiyat=20, KategoriID=1 },
-                new EkstraMalzeme() { ID=2, Ad="mayonez", Fiyat=20, KategoriID=2 }
+                new EkstraMalzeme() { ID = 1, Ad = "ketçap", Fiyat = 20, KategoriID = 1 },
+                new EkstraMalzeme() { ID = 2, Ad = "mayonez", Fiyat = 20, KategoriID = 2 },
+                new EkstraMalzeme() { ID = 3, Ad = "Sos İstemiyorum", Fiyat = 0, KategoriID = 3 }
                 );
         }
     }

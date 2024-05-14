@@ -41,9 +41,6 @@ namespace MVC_Hamburger.Migrations
                     b.Property<int>("KategoriID")
                         .HasColumnType("int");
 
-                    b.Property<int>("MenuAdet")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
                     b.HasIndex("KategoriID");
@@ -56,32 +53,22 @@ namespace MVC_Hamburger.Migrations
                             ID = 1,
                             Ad = "ketçap",
                             Fiyat = 20m,
-                            KategoriID = 1,
-                            MenuAdet = 0
+                            KategoriID = 1
                         },
                         new
                         {
                             ID = 2,
                             Ad = "mayonez",
                             Fiyat = 20m,
-                            KategoriID = 2,
-                            MenuAdet = 0
+                            KategoriID = 2
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Ad = "Sos İstemiyorum",
+                            Fiyat = 0m,
+                            KategoriID = 3
                         });
-                });
-
-            modelBuilder.Entity("MVC_Hamburger.Models.Concrete.EkstraMalzemeMenu", b =>
-                {
-                    b.Property<int>("EkstraMalzemeID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MenuID")
-                        .HasColumnType("int");
-
-                    b.HasKey("EkstraMalzemeID", "MenuID");
-
-                    b.HasIndex("MenuID");
-
-                    b.ToTable("EkstraMalzemeMenuler");
                 });
 
             modelBuilder.Entity("MVC_Hamburger.Models.Concrete.Kategori", b =>
@@ -115,6 +102,11 @@ namespace MVC_Hamburger.Migrations
                         {
                             KategoriID = 3,
                             KategoriAdi = "Sos"
+                        },
+                        new
+                        {
+                            KategoriID = 4,
+                            KategoriAdi = "Çıtır Lezzetler"
                         });
                 });
 
@@ -131,15 +123,8 @@ namespace MVC_Hamburger.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar");
 
-                    b.Property<string>("Boy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("money");
-
-                    b.Property<int>("MenuAdet")
-                        .HasColumnType("int");
 
                     b.Property<string>("ResimYolu")
                         .IsRequired()
@@ -155,18 +140,14 @@ namespace MVC_Hamburger.Migrations
                         {
                             ID = 1,
                             Ad = "hamburger",
-                            Boy = "Kucuk",
                             Fiyat = 159m,
-                            MenuAdet = 1,
                             ResimYolu = "sfdsfa"
                         },
                         new
                         {
                             ID = 2,
                             Ad = "burger",
-                            Boy = "Kucuk",
                             Fiyat = 169m,
-                            MenuAdet = 1,
                             ResimYolu = "sfdsfa"
                         });
                 });
@@ -204,14 +185,14 @@ namespace MVC_Hamburger.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "e09ba073-155a-42df-b4ce-e43be6edfce4",
+                            ConcurrencyStamp = "82f13da9-dfdc-4cfd-a32e-0f5a413abbc1",
                             Name = "Yonetici",
                             NormalizedName = "YONETICI"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "a67bcf52-7460-41a7-ae80-2a3e43cf65b5",
+                            ConcurrencyStamp = "22509e60-4e1d-4711-9fc2-236f7b107a03",
                             Name = "Musteri",
                             NormalizedName = "MUSTERI"
                         });
@@ -225,8 +206,9 @@ namespace MVC_Hamburger.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("MenuAdet")
-                        .HasColumnType("int");
+                    b.Property<string>("Boy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OlusturulmaTarihi")
                         .HasColumnType("datetime2");
@@ -244,12 +226,33 @@ namespace MVC_Hamburger.Migrations
                     b.ToTable("Siparisler");
                 });
 
+            modelBuilder.Entity("MVC_Hamburger.Models.Concrete.SiparisEkstraMalzeme", b =>
+                {
+                    b.Property<int>("EkstraMalzemeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SiparisID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EkstraMalzemeAdedi")
+                        .HasColumnType("int");
+
+                    b.HasKey("EkstraMalzemeID", "SiparisID");
+
+                    b.HasIndex("SiparisID");
+
+                    b.ToTable("SiparisEkstraMalzemeler");
+                });
+
             modelBuilder.Entity("MVC_Hamburger.Models.Concrete.SiparisMenu", b =>
                 {
                     b.Property<int>("SiparisID")
                         .HasColumnType("int");
 
                     b.Property<int>("MenuID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MenuAdedi")
                         .HasColumnType("int");
 
                     b.HasKey("SiparisID", "MenuID");
@@ -336,15 +339,15 @@ namespace MVC_Hamburger.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Adres = "Istanbul",
-                            ConcurrencyStamp = "28c68912-1777-470e-85b8-3fcfe65206d3",
+                            ConcurrencyStamp = "3db0b96e-f976-4b97-a395-39d8ef7ff20a",
                             Email = "deniz@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DENIZ@ADMIN.COM",
                             NormalizedUserName = "DENIZ@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEmGzq2vNfEENYTl4ei5EAKwl8CNMyPRSknPpvkMC+eAyLNH2KsyaKxNaW9LDFWIGA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAyeFlXWdlJba0xpRXOkWWS4+r5Uy+d7xTtROudZQV9lv3RiElrgIZcFz31kZ1gj1A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a0155478-e893-4bb6-b308-b72ab1d8b304",
+                            SecurityStamp = "2f08fdbb-42f3-4046-aadf-cc3412dfe8e1",
                             TwoFactorEnabled = false,
                             UserName = "deniz@admin.com"
                         },
@@ -353,15 +356,15 @@ namespace MVC_Hamburger.Migrations
                             Id = 2,
                             AccessFailedCount = 0,
                             Adres = "Istanbul",
-                            ConcurrencyStamp = "92f7e033-a333-4c76-a218-b852172e75ca",
+                            ConcurrencyStamp = "84744600-3114-49b5-b671-508e4b32aceb",
                             Email = "cemre@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "CEMRE@ADMIN.COM",
                             NormalizedUserName = "CEMRE@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFaC3PXZDZhUy4TPeqhPsux2AFW+eQosOl8lLROsQ9ZzbhFZmvYwiCLDC3KV9pabJg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ8F9yFckIMY+v/NUmZFRTXUzuHgU7YL50kkDKpjamSvp+GQIaGoFzCBJKIYyYv+qg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "21c99558-1eec-4081-bcca-46cfea373da9",
+                            SecurityStamp = "3539b586-04a5-4521-a185-05698db23187",
                             TwoFactorEnabled = false,
                             UserName = "cemre@admin.com"
                         },
@@ -370,39 +373,18 @@ namespace MVC_Hamburger.Migrations
                             Id = 3,
                             AccessFailedCount = 0,
                             Adres = "Istanbul",
-                            ConcurrencyStamp = "9b9ffc7c-9dcc-41f5-a0a7-7b58b503beed",
+                            ConcurrencyStamp = "b1c0ee27-f5a0-4492-a3cf-c8da6a8c8320",
                             Email = "onur@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ONUR@ADMIN.COM",
                             NormalizedUserName = "ONUR@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAMOzaK81DiaMBdsj34OWySvj6mck8SwfmXmZf76GGRJUIDxRXWgez1JbI7F5OjqJQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOWjzubiYrL1ELhU6+EPD767GLIkKbxvAQ8kcVP/a8Rciyi8GvJkiy2ZUgMe8N7p6w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "58d7e633-e7ac-4711-a707-7e0a0d48fef2",
+                            SecurityStamp = "e79aa308-9ce0-42ba-8cc4-4cb812a5013e",
                             TwoFactorEnabled = false,
                             UserName = "onur@admin.com"
                         });
-                });
-
-            modelBuilder.Entity("MVC_Hamburger.Models.ViewModels.LoginVM", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Sifre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("LoginVM");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -536,25 +518,6 @@ namespace MVC_Hamburger.Migrations
                     b.Navigation("Kategori");
                 });
 
-            modelBuilder.Entity("MVC_Hamburger.Models.Concrete.EkstraMalzemeMenu", b =>
-                {
-                    b.HasOne("MVC_Hamburger.Models.Concrete.EkstraMalzeme", "EkstraMalzeme")
-                        .WithMany("EkstraMalzemeMenuler")
-                        .HasForeignKey("EkstraMalzemeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MVC_Hamburger.Models.Concrete.Menu", "Menu")
-                        .WithMany("EkstraMalzemeMenuler")
-                        .HasForeignKey("MenuID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EkstraMalzeme");
-
-                    b.Navigation("Menu");
-                });
-
             modelBuilder.Entity("MVC_Hamburger.Models.Concrete.Siparis", b =>
                 {
                     b.HasOne("MVC_Hamburger.Models.Concrete.Uye", "Uye")
@@ -564,6 +527,25 @@ namespace MVC_Hamburger.Migrations
                         .IsRequired();
 
                     b.Navigation("Uye");
+                });
+
+            modelBuilder.Entity("MVC_Hamburger.Models.Concrete.SiparisEkstraMalzeme", b =>
+                {
+                    b.HasOne("MVC_Hamburger.Models.Concrete.EkstraMalzeme", "EkstraMalzeme")
+                        .WithMany("SiparisEkstraMalzemeler")
+                        .HasForeignKey("EkstraMalzemeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVC_Hamburger.Models.Concrete.Siparis", "Siparis")
+                        .WithMany("SiparisEkstraMalzemeler")
+                        .HasForeignKey("SiparisID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EkstraMalzeme");
+
+                    b.Navigation("Siparis");
                 });
 
             modelBuilder.Entity("MVC_Hamburger.Models.Concrete.SiparisMenu", b =>
@@ -638,7 +620,7 @@ namespace MVC_Hamburger.Migrations
 
             modelBuilder.Entity("MVC_Hamburger.Models.Concrete.EkstraMalzeme", b =>
                 {
-                    b.Navigation("EkstraMalzemeMenuler");
+                    b.Navigation("SiparisEkstraMalzemeler");
                 });
 
             modelBuilder.Entity("MVC_Hamburger.Models.Concrete.Kategori", b =>
@@ -648,13 +630,13 @@ namespace MVC_Hamburger.Migrations
 
             modelBuilder.Entity("MVC_Hamburger.Models.Concrete.Menu", b =>
                 {
-                    b.Navigation("EkstraMalzemeMenuler");
-
                     b.Navigation("SiparisMenuler");
                 });
 
             modelBuilder.Entity("MVC_Hamburger.Models.Concrete.Siparis", b =>
                 {
+                    b.Navigation("SiparisEkstraMalzemeler");
+
                     b.Navigation("SiparisMenuler");
                 });
 
