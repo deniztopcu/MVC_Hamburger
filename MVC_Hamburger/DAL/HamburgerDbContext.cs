@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MVC_Hamburger.Models.Concrete;
 using System.Reflection;
 using MVC_Hamburger.Models.ViewModels;
+using MVC_Hamburger.Areas.YonetimPaneli.Models.ViewModels;
 
 namespace MVC_Hamburger.DAL
 {
