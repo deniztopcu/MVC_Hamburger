@@ -13,22 +13,23 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
 {
     [Authorize(Roles = "Yonetici")]
     [Area("YonetimPaneli")]
-    public class MenusController : Controller
+    
+    public class MenuController : Controller
     {
         private readonly HamburgerDbContext _context;
 
-        public MenusController(HamburgerDbContext context)
+        public MenuController(HamburgerDbContext context)
         {
             _context = context;
         }
 
-        // GET: YonetimPaneli/Menus
+        // GET: YonetimPaneli/Menu
         public async Task<IActionResult> Index()
         {
             return View(await _context.Menuler.ToListAsync());
         }
 
-        // GET: YonetimPaneli/Menus/Details/5
+        // GET: YonetimPaneli/Menu/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,18 +47,18 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
             return View(menu);
         }
 
-        // GET: YonetimPaneli/Menus/Create
+        // GET: YonetimPaneli/Menu/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: YonetimPaneli/Menus/Create
+        // POST: YonetimPaneli/Menu/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ResimYolu,ID,Ad,Fiyat,MenuAdet")] Menu menu)
+        public async Task<IActionResult> Create([Bind("ResimYolu,ID,Ad,Fiyat")] Menu menu)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +69,7 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
             return View(menu);
         }
 
-        // GET: YonetimPaneli/Menus/Edit/5
+        // GET: YonetimPaneli/Menu/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,12 +85,12 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
             return View(menu);
         }
 
-        // POST: YonetimPaneli/Menus/Edit/5
+        // POST: YonetimPaneli/Menu/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ResimYolu,ID,Ad,Fiyat,MenuAdet")] Menu menu)
+        public async Task<IActionResult> Edit(int id, [Bind("ResimYolu,ID,Ad,Fiyat")] Menu menu)
         {
             if (id != menu.ID)
             {
@@ -119,7 +120,7 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
             return View(menu);
         }
 
-        // GET: YonetimPaneli/Menus/Delete/5
+        // GET: YonetimPaneli/Menu/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,7 +138,7 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
             return View(menu);
         }
 
-        // POST: YonetimPaneli/Menus/Delete/5
+        // POST: YonetimPaneli/Menu/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

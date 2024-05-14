@@ -23,7 +23,7 @@ namespace MVC_Hamburger.DAL
         public DbSet<Kategori> Kategoriler { get; set; }//Ekstra malzemenin kategorisi
         public DbSet<Menu> Menuler { get; set; }
         public DbSet<Siparis> Siparisler { get; set; }
-        public DbSet<EkstraMalzemeMenu> EkstraMalzemeMenuler { get; set; }
+        public DbSet<SiparisEkstraMalzeme> SiparisEkstraMalzemeler { get; set; }
         public DbSet<SiparisMenu> SiparisMenuler { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -37,6 +37,6 @@ namespace MVC_Hamburger.DAL
                 new IdentityUserRole<int>() { UserId = 2, RoleId = 1 }, 
                 new IdentityUserRole<int>() { UserId = 3, RoleId = 1 });
         }
-        public DbSet<MVC_Hamburger.Models.ViewModels.LoginVM> LoginVM { get; set; } = default!;
+
     }
 }

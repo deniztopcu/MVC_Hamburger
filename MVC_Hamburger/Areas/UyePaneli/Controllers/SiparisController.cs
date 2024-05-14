@@ -58,7 +58,7 @@ namespace MVC_Hamburger.Areas.UyePaneli.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,MenuAdet,ToplamFiyat,OlusturulmaTarihi,UyeID")] Siparis siparis)
+        public async Task<IActionResult> Create([Bind("ID,ToplamFiyat,OlusturulmaTarihi,Boy,UyeID")] Siparis siparis)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace MVC_Hamburger.Areas.UyePaneli.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,MenuAdet,ToplamFiyat,OlusturulmaTarihi,UyeID")] Siparis siparis)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ToplamFiyat,OlusturulmaTarihi,Boy,UyeID")] Siparis siparis)
         {
             if (id != siparis.ID)
             {

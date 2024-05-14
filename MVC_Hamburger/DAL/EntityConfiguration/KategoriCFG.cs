@@ -10,11 +10,13 @@ namespace MVC_Hamburger.DAL.EntityConfiguration
         {
             builder.HasKey(x=>x.KategoriID);
             builder.Property(x => x.KategoriAdi);
+           
             builder.HasData(
                 
                 new Kategori() { KategoriID=1, KategoriAdi="İçecek"},
                 new Kategori() { KategoriID=2, KategoriAdi="Tatlı"},
-                new Kategori() { KategoriID=3, KategoriAdi= "Sos" }
+                new Kategori() { KategoriID=3, KategoriAdi= "Sos" },
+                new Kategori() { KategoriID = 4, KategoriAdi = "Çıtır Lezzetler" }
                 );
         }
     }

@@ -7,6 +7,6 @@ namespace MVC_Hamburger.Models.Concrete
     {
         public int KategoriID { get; set; }
         public Kategori Kategori { get; set; }
-        public ICollection<EkstraMalzemeMenu>? EkstraMalzemeMenuler { get; set; }
+        public ICollection<SiparisEkstraMalzeme>? SiparisEkstraMalzemeler { get; set; }
     }
 }

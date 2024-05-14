@@ -2,40 +2,53 @@
 @inject UserManager<Uye> UserManager
 @inject SignInManager<Uye> SignInManager
 
-<ul class="navbar-nav">
 
-    @if (SignInManager.IsSignedIn(User))
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+
+    @if (User.IsInRole("Yonetici"))
     {
-        <li>Merhaba @UserManager.GetUserName(User)</li>
 
-        @if (User.IsInRole("Yonetici"))
-        {
-            <li class="navbar-item">
-                <a asp-area="YonetimPaneli" asp-controller="YonetimPanel" asp-action="Index">Yönetim Paneline Git</a>
-            </li>
-        }
-        else
-        {
-            <li class="navbar-item">
-                <a asp-area="UyePaneli" asp-controller="UyePanel" asp-action="Index">Üye Paneline Git</a>
-            </li>
-
-        }
-        <li class="navbar-item">
-            @*   <form asp-action="LogOut" asp-controller="Login" >
-        <input type="submit" value="LogOut" />
-        </form> *@
-            <a asp-controller="Login" asp-action="LogOut">Çıkış</a>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="Kategori" asp-action="Index">Kategoriler</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="Menu" asp-action="Index">Menuler</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="EkstraMalzeme" asp-action="Index">EkstraMalzemeler</a>
+        </li>
+        <li>Merhaba @UserManager.GetUserName(User)</li>
+        <li class="navbar-item">
+            <a asp-area="YonetimPaneli" asp-controller="YonetimPanel" asp-action="Index">Yönetim Paneline Git</a>
+        </li>
+
+
     }
     else
     {
         <li class="navbar-item">
-            <a asp-controller="Login" asp-action="Login">Login</a>
-            <a asp-controller="Login" asp-action="Register">Register</a>
+            <a asp-area="UyePaneli" asp-controller="UyePanel" asp-action="Index">Üye Paneline Git</a>
         </li>
 
     }
+    <li class="navbar-item">
+        @*   <form asp-action="LogOut" asp-controller="Login" >
+    <input type="submit" value="LogOut" />
+    </form> *@
+        <a asp-controller="Login" asp-action="LogOut">Çıkış</a>
+    </li>
+}
+else
+{
+    <li class="navbar-item">
+        <a asp-controller="Login" asp-action="Login">Login</a>
+        <a asp-controller="Login" asp-action="Register">Register</a>
+    </li>
 
-</ul>
+}
+
+
 
