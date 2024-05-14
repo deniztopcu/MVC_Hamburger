@@ -36,7 +36,7 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
         }
 
         // GET: MenuController/Create
-        public IActionResult Create()
+        public ActionResult Create()
         {
             MenuVM menuVM = new MenuVM();   
             return View(menuVM);
@@ -44,8 +44,8 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
 
         // POST: MenuController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(MenuVM menuVM)
+        
+        public ActionResult Create(MenuVM menuVM)
         {
             var menuEkleVM = menuVM.MenuEkle;
             if(ModelState.IsValid)
@@ -98,7 +98,6 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
                 _context.Menuler.Update(updMenu);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
-
             }
             return View();
         }
