@@ -52,7 +52,7 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
         // GET: YonetimPaneli/EkstraMalzeme/Create
         public IActionResult Create()
         {
-            ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriID");
+            ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriAdi");
             return View();
         }
 
@@ -63,6 +63,7 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("KategoriID,ID,Ad,Fiyat")] EkstraMalzeme ekstraMalzeme)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(ekstraMalzeme);

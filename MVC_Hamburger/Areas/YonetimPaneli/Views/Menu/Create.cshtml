@@ -1,4 +1,5 @@
-﻿@model MVC_Hamburger.Models.Concrete.Menu
+﻿@using MVC_Hamburger.Areas.YonetimPaneli.Models.ViewModels
+@model MenuVM
 
 @{
     ViewData["Title"] = "Create";
@@ -10,22 +11,22 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ResimYolu" class="control-label"></label>
-                <input asp-for="ResimYolu" class="form-control" />
-                <span asp-validation-for="ResimYolu" class="text-danger"></span>
+                <label asp-for="MenuEkle.MenuResim" class="control-label"></label>
+                <input asp-for="MenuEkle.MenuResim" class="form-control" type="file" />
+                <span asp-validation-for="MenuEkle.MenuResim" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Ad" class="control-label"></label>
-                <input asp-for="Ad" class="form-control" />
-                <span asp-validation-for="Ad" class="text-danger"></span>
+                <label asp-for="MenuEkle.MenuAdi" class="control-label"></label>
+                <input asp-for="MenuEkle.MenuAdi" class="form-control" />
+                <span asp-validation-for="MenuEkle.MenuAdi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Fiyat" class="control-label"></label>
-                <input asp-for="Fiyat" class="form-control" />
-                <span asp-validation-for="Fiyat" class="text-danger"></span>
+                <label asp-for="MenuEkle.MenuFiyat" class="control-label"></label>
+                <input asp-for="MenuEkle.MenuFiyat" class="form-control" />
+                <span asp-validation-for="MenuEkle.MenuFiyat" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -34,6 +35,7 @@
     </div>
 </div>
 
+<div asp-validation-summary="All" lang="tr"></div>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
