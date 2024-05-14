@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MVC_Hamburger.Areas.YonetimPaneli.Models.ViewModels;
 using MVC_Hamburger.DAL;
 using MVC_Hamburger.Models.Concrete;
@@ -24,35 +25,35 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
         // GET: MenuController
         public IActionResult Index()
         {
-            var menuler = _context.Menuler.ToList();             
+            var menuler = _context.Menuler.ToList();
             return View(menuler);
         }
 
         // GET: MenuController/Details/5
         public IActionResult Details(int id)
         {
-            Menu menu = _context.Menuler.FirstOrDefault(x=>x.ID==id);
+            Menu menu = _context.Menuler.FirstOrDefault(x => x.ID == id);
             return View(menu);
         }
 
         // GET: MenuController/Create
         public ActionResult Create()
         {
-            MenuVM menuVM = new MenuVM();   
+            MenuVM menuVM = new MenuVM();
             return View(menuVM);
         }
 
         // POST: MenuController/Create
         [HttpPost]
-        
+
         public ActionResult Create(MenuVM menuVM)
         {
             var menuEkleVM = menuVM.MenuEkle;
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 Menu menu = new Menu();
                 menu.Ad = menuEkleVM.MenuAdi;
-                menu.Fiyat= menuEkleVM.MenuFiyat;
+                menu.Fiyat = menuEkleVM.MenuFiyat;
 
                 Guid guid = Guid.NewGuid();
                 string dosyaAdi = guid.ToString();
@@ -64,20 +65,20 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
                 menuEkleVM.MenuResim.CopyTo(fs);
                 fs.Close();
 
-                _context.Menuler.Add(menu); 
-                _context.SaveChanges(); 
-                return RedirectToAction("Index");   
+                _context.Menuler.Add(menu);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
 
             }
-            return View();  
+            return View();
 
         }
 
         // GET: MenuController/Edit/5
         public IActionResult Edit(int id)
-        {   
+        {
             Menu menu = _context.Menuler.FirstOrDefault(x => x.ID == id);
-            
+
             //menuVM.ResimYolu = menuVM.Menu.ResimYolu;
 
 
@@ -89,7 +90,7 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int? id, Menu menu)
         {
-            
+
             if (ModelState.IsValid)
             {
                 Menu updMenu = _context.Menuler.FirstOrDefault(x => x.ID == id);
@@ -103,24 +104,25 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
         }
 
         //GET: MenuController/Delete/5
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int? id)
         {
-            return View();
+            Menu menu = _context.Menuler.FirstOrDefault(x => x.ID == id);
+            return View(menu);
         }
 
         //POST: MenuController/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
+        public IActionResult DeleteConfirmed(int id)
         {
-            try
+            var menu = _context.Menuler.Find(id);
+            if (menu != null)
             {
-                return RedirectToAction(nameof(Index));
+                _context.Menuler.Remove(menu);
+
             }
-            catch
-            {
-                return View();
-            }
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
