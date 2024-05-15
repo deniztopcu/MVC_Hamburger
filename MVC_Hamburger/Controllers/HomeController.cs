@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using MVC_Hamburger.Areas.YonetimPaneli.Models.ViewModels;
+using MVC_Hamburger.DAL;
 using MVC_Hamburger.Models;
 using System.Diagnostics;
 
@@ -7,15 +9,17 @@ namespace MVC_Hamburger.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly HamburgerDbContext _context;
+        public HomeController(HamburgerDbContext context)
         {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
+            _context = context;
+            menuVM = new MenuVM();
+		}
+        MenuVM menuVM;
+		public IActionResult Index()
         {
-            return View();
+            menuVM.Menuler= _context.Menuler.ToList();
+            return View(menuVM);
         }
 
         public IActionResult Privacy()
