@@ -38,14 +38,14 @@
         @*   <form asp-action="LogOut" asp-controller="Login" >
     <input type="submit" value="LogOut" />
     </form> *@
-        <a asp-controller="Login" asp-action="LogOut">Çıkış</a>
+        <a asp-controller="Login" asp-action="LogOut" class="btn btn-warning">Çıkış</a>
     </li>
 }
 else
 {
     <li class="navbar-item">
-        <a asp-controller="Login" asp-action="Login">Login</a>
-        <a asp-controller="Login" asp-action="Register">Register</a>
+        <a asp-controller="Login" asp-action="Login" class="btn btn-danger">Login</a>
+        <a asp-controller="Login" asp-action="Register" class="btn btn-danger">Register</a>
     </li>
 
 }
