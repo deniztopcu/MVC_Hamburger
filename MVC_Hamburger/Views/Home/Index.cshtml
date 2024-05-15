@@ -5,13 +5,14 @@
 }
 
 <div class="row">
-	<nav class="products-tabs main-tabs nav nav-tabs col-2 flex-column">
-		<a href="/burger-king" class="nav-item nav-link nav-link active">
-			<h1>Popüler Ürünler</h1>
-		</a><a href="/burger-king" class="nav-item nav-link nav-link"><span>Menüler</span></a>
-		<a href="/burger-king" class="nav-item nav-link nav-link"><span>Burgerler</span></a><a href="/burger-king" class="nav-item nav-link nav-link"><span>Kids Menüler</span></a>
-		<a href="/burger-king" class="nav-item nav-link nav-link"><span>Çıtır Lezzetler</span></a><a href="/burger-king" class="nav-item nav-link nav-link"><span>Tatlılar</span></a>
-		<a href="/burger-king" class="nav-item nav-link nav-link"><span>Soslar</span></a><a href="/burger-king" class="nav-item nav-link nav-link"><span>İçecekler</span></a>
+	<nav class="nav nav-tabs pt-3 col-2 flex-column bg-danger text-center" style="border-radius:5px">
+		<a href="/burger-king" class="nav-item nav-link nav-link text-white"><span>Menüler</span></a>
+		<a href="/burger-king" class="nav-item nav-link nav-link text-white"><span>Burgerler</span></a>
+		<a href="/burger-king" class="nav-item nav-link nav-link text-white"><span>Kids Menüler</span></a>
+		<a href="/burger-king text-white" class="nav-item nav-link nav-link text-white"><span>Çıtır Lezzetler</span></a>
+		<a href="/burger-king" class="nav-item nav-link nav-link text-white"><span>Tatlılar</span></a>
+		<a href="/burger-king text-white" class="nav-item nav-link nav-link text-white text-white"><span>Soslar</span></a>
+		<a href="/burger-king" class="nav-item nav-link nav-link text-white"><span>İçecekler</span></a>
 	</nav>
 <div class="row text-center justify-content-between col-10 ">
 
@@ -33,7 +34,7 @@
 							<span class="card-footer">
 								<span>@item.Icerik</span>
 							</span>
-							<a class="btn btn-danger" asp-controller="Home" asp-action="Privacy">
+							<a class="btn btn-danger" asp-route-id="@item.ID" asp-controller="Siparis" asp-action="Index">
 								Sepete Ekle
 							</a>
 							

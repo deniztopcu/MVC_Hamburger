@@ -21,23 +21,18 @@
             <a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="EkstraMalzeme" asp-action="Index">EkstraMalzemeler</a>
         </li>
         <li>Merhaba @UserManager.GetUserName(User)</li>
-        <li class="navbar-item">
-            <a asp-area="YonetimPaneli" asp-controller="YonetimPanel" asp-action="Index">Yönetim Paneline Git</a>
-        </li>
 
 
     }
     else
     {
+        <li>Merhaba @UserManager.GetUserName(User)</li>
         <li class="navbar-item">
-            <a asp-area="UyePaneli" asp-controller="UyePanel" asp-action="Index">Üye Paneline Git</a>
+            <a asp-controller="Home" asp-action="Index"></a>
         </li>
 
     }
     <li class="navbar-item">
-        @*   <form asp-action="LogOut" asp-controller="Login" >
-    <input type="submit" value="LogOut" />
-    </form> *@
         <a asp-controller="Login" asp-action="LogOut" class="btn btn-warning">Çıkış</a>
     </li>
 }

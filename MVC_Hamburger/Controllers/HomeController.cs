@@ -2,10 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using MVC_Hamburger.Areas.YonetimPaneli.Models.ViewModels;
 using MVC_Hamburger.DAL;
 using MVC_Hamburger.Models;
+using MVC_Hamburger.Models.Concrete;
 using System.Diagnostics;
 
 namespace MVC_Hamburger.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
