@@ -118,7 +118,8 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             var menu = _context.Menuler.Find(id);
-            if (menu != null)
+			System.IO.File.Delete("wwwroot/MenuResimleri/" + menu.ResimYolu);
+			if (menu != null)
             {
                 _context.Menuler.Remove(menu);
 

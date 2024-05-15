@@ -27,16 +27,16 @@
 						</div>
 						<div class="card-body">
 							<span class="card-footer">
-								<span>@item.Fiyat.ToString("0.##")</span>
+								<span>@item.Fiyat.ToString("0.##") TL</span>
 							</span>
 							<br />
 							<span class="card-footer">
 								<span>@item.Icerik</span>
 							</span>
-							<button type="button" class="add-button btn btn-primary">
-								<span><i class="icon-Basket"></i></span>
-								<div class="add-button-badge"><i class="icon-Add"></i></div>
-							</button>
+							<a class="btn btn-danger" asp-controller="Home" asp-action="Privacy">
+								Sepete Ekle
+							</a>
+							
 						</div>
 					</div>
 				</div>
