@@ -54,6 +54,7 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
                 Menu menu = new Menu();
                 menu.Ad = menuEkleVM.MenuAdi;
                 menu.Fiyat = menuEkleVM.MenuFiyat;
+                menu.Icerik = menuEkleVM.MenuIcerik;
 
                 Guid guid = Guid.NewGuid();
                 string dosyaAdi = guid.ToString();
@@ -96,6 +97,7 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
                 Menu updMenu = _context.Menuler.FirstOrDefault(x => x.ID == id);
                 updMenu.Ad = menu.Ad;
                 updMenu.Fiyat = menu.Fiyat;
+                updMenu.Icerik=menu.Icerik;
                 _context.Menuler.Update(updMenu);
                 _context.SaveChanges();
                 return RedirectToAction("Index");

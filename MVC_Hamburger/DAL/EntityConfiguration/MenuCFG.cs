@@ -12,6 +12,7 @@ namespace MVC_Hamburger.DAL.EntityConfiguration
             builder.HasKey(x => x.ID);
             builder.Property(x => x.Ad).HasColumnType("varchar").HasMaxLength(50);
             builder.Property(x => x.ResimYolu).HasColumnType("varchar").HasMaxLength(100);
+            builder.Property(x => x.Icerik).HasColumnType("varchar").HasMaxLength(250);
            
             builder.Property(x => x.Fiyat).HasColumnType("money");
             builder.HasData(

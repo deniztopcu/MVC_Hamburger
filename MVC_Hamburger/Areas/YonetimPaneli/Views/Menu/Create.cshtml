@@ -29,6 +29,11 @@
                 <span asp-validation-for="MenuEkle.MenuFiyat" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="MenuEkle.MenuIcerik" class="control-label"></label>
+                <input asp-for="MenuEkle.MenuIcerik" class="form-control" />
+                <span asp-validation-for="MenuEkle.MenuIcerik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
