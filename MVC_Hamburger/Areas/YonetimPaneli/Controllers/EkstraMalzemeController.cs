@@ -70,7 +70,7 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriID", ekstraMalzeme.KategoriID);
+            ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriAdi", ekstraMalzeme.KategoriID);
             return View(ekstraMalzeme);
         }
 
@@ -87,7 +87,7 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
             {
                 return NotFound();
             }
-            ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriID", ekstraMalzeme.KategoriID);
+            ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriAdi", ekstraMalzeme.KategoriID);
             return View(ekstraMalzeme);
         }
 
@@ -123,7 +123,7 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriID", ekstraMalzeme.KategoriID);
+            ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriAdi", ekstraMalzeme.KategoriID);
             return View(ekstraMalzeme);
         }
 

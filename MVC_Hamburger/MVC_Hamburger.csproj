@@ -19,10 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\UyePaneli\Data\" />
-    <Folder Include="Areas\UyePaneli\Models\" />
     <Folder Include="Areas\YonetimPaneli\Data\" />
-    <Folder Include="wwwroot\MenuResimleri\" />
+    <Folder Include="Models\DTOs\" />
   </ItemGroup>
 
 </Project>

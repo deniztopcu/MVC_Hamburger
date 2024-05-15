@@ -9,7 +9,7 @@ namespace MVC_Hamburger.Models.Concrete
 
         public decimal ToplamFiyat { get; set; }
 
-        public DateTime OlusturulmaTarihi { get; set; }
+        public DateTime OlusturulmaTarihi { get; set; } = DateTime.Now;
 
         public Boy Boy { get; set; }
 
