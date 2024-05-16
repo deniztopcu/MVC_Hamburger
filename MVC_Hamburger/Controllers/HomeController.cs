@@ -20,14 +20,15 @@ namespace MVC_Hamburger.Controllers
         MenuVM menuVM;
 		public IActionResult Index()
         {
-            menuVM.Menuler= _context.Menuler.ToList();
-            return View(menuVM);
-        }
-
-        public IActionResult Privacy()
-        {
+            
             return View();
         }
+
+        public IActionResult Burgerler()
+        {
+			menuVM.Menuler = _context.Menuler.ToList();
+			return View(menuVM);
+		}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

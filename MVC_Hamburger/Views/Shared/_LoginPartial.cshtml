@@ -8,40 +8,30 @@
 {
 
 
-    @if (User.IsInRole("Yonetici"))
-    {
-
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="Kategori" asp-action="Index">Kategoriler</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="Menu" asp-action="Index">Menuler</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="EkstraMalzeme" asp-action="Index">EkstraMalzemeler</a>
-        </li>
-        <li>Merhaba @UserManager.GetUserName(User)</li>
+	@if (User.IsInRole("Yonetici"))
+	{
+			<a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="Kategori" asp-action="Index">Kategoriler</a>
+			<a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="Menu" asp-action="Index">Menuler</a>
+			<a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="EkstraMalzeme" asp-action="Index">EkstraMalzemeler</a>
+		<p>Merhaba @UserManager.GetUserName(User)</p>
 
 
-    }
-    else
-    {
-        <li>Merhaba @UserManager.GetUserName(User)</li>
-        <li class="navbar-item">
-            <a asp-controller="Home" asp-action="Index"></a>
-        </li>
+	}
+	else
+	{
+		<p>Merhaba @UserManager.GetUserName(User)</p>
+			<a asp-controller="Home" asp-action="Index"></a>
 
-    }
-    <li class="navbar-item">
-        <a asp-controller="Login" asp-action="LogOut" class="btn btn-warning">Çıkış</a>
-    </li>
+	}
+		<a asp-controller="Login" asp-action="LogOut" class="btn btn-warning">Çıkış</a>
 }
 else
 {
-    <li class="navbar-item">
-        <a asp-controller="Login" asp-action="Login" class="btn btn-danger">Login</a>
-        <a asp-controller="Login" asp-action="Register" class="btn btn-danger">Register</a>
-    </li>
+@* 	<div class="ml-auto"> *@
+				<a asp-controller="Login" asp-action="Login" class="btn btn-danger">Login</a>
+				<a asp-controller="Login" asp-action="Register" class="btn btn-danger">Register</a>
+	@* @* </div> *@
+
 
 }
 

@@ -1,4 +1,5 @@
 ﻿using MVC_Hamburger.Models.Concrete;
+using System.ComponentModel.DataAnnotations;
 
 namespace MVC_Hamburger.Models.ViewModels
 {
@@ -6,7 +7,9 @@ namespace MVC_Hamburger.Models.ViewModels
 	{
 		public int? EkstraMalzemeId { get; set; }
 		public string? EkstraMalzemeAdi { get; set; }
-		public decimal? EkstraMalzemeFiyati { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
+        public decimal EkstraMalzemeFiyati { get; set; }
         public Kategori? EkstraMalzemeKategori { get; set; }
     }
 }

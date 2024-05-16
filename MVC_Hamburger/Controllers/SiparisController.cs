@@ -18,13 +18,21 @@ namespace MVC_Hamburger.Controllers
 
 		}
 		SiparisVM model;
-		public IActionResult Index(int? id)
+		public IActionResult SepeteEkle(int? id)
 		{
-			model.SecilenMenu = _context.Menuler.FirstOrDefault(x => x.ID == id);
-			model.EkstraMalzemeKategori = _context.Kategoriler.ToList();
-
-
-			var ekstraMalzemeler = _context.EkstraMalzemeler.Include(x => x.Kategori).Select(x => new SiparisEkstraMalzemeVM
+            model.SecilenMenu = _context.Menuler
+				.Where(sm => sm.ID == id)
+				.Select(sm => new SiparisMenuVM
+				{
+				    MenuId = sm.ID,
+				    MenuAdi = sm.Ad,
+				    MenuFiyati = sm.Fiyat,
+					MenuResimYolu=sm.ResimYolu,
+					MenuIcerik=sm.Icerik
+				})
+				.FirstOrDefault();
+			model.EkstraMalzemeKategori=_context.Kategoriler.ToList();
+            var ekstraMalzemeler = _context.EkstraMalzemeler.Include(x => x.Kategori).Select(x => new SiparisEkstraMalzemeVM
 			{
 				EkstraMalzemeId = x.ID,
 				EkstraMalzemeAdi = x.Ad,
@@ -34,11 +42,18 @@ namespace MVC_Hamburger.Controllers
 			model.SiparisEkstraMalzemeler = ekstraMalzemeler;
 			return View(model);
 		}
+		[HttpPost]
+		public IActionResult SepeteEkle(SiparisVM siparis)
+		{
+
+			return RedirectToAction("Index", "Home");
+		}
 		public SelectList GetEkstraById(int id)
 		{
 			SelectList ekstramalzemeler = new SelectList(_context.EkstraMalzemeler.Where(x => x.KategoriID == id).ToList(), "ID", "Ad");
 			return ekstramalzemeler;
 		}
 
+		
 	}
 }
