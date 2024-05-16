@@ -10,7 +10,7 @@ namespace MVC_Hamburger.Models.ViewModels
 		public decimal? ToplamFiyat { get; set; }
 		public int? UyeID { get; set; }
 		public ICollection<SiparisEkstraMalzemeVM>? SiparisEkstraMalzemeler { get; set; }
-		public Menu? SecilenMenu { get; set; }
+		public SiparisMenuVM? SecilenMenu { get; set; }
         public Boy? Boy { get; set; }
 
         // Ekstra malzeme kategorileri

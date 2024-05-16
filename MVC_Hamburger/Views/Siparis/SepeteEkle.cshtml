@@ -1,0 +1,84 @@
+﻿@using MVC_Hamburger.Models.Enums
+@using MVC_Hamburger.Models.ViewModels
+@model SiparisVM
+@{
+    Layout = "_AdminLayout";
+}
+    <form asp-action="SepeteEkle" method="post" class="container" enctype="multipart/form-data">
+<div class="row">
+    <!-- Sol tarafta menü listesi -->
+
+    
+    <div class="col-md-6">
+        <h2>MENÜ</h2>
+            <div>
+            <img src="~/MenuResimleri/@Model.SecilenMenu?.MenuResimYolu" width="100%" height="350px">
+            
+            <label asp-for="SecilenMenu.MenuAdi">@Model.SecilenMenu?.MenuAdi </label>
+            <br />
+                <label asp-for="SecilenMenu.MenuIcerik">İçindekiler: @Model.SecilenMenu?.MenuIcerik</label>
+                <br />
+                <label asp-for="SecilenMenu.MenuFiyati">Fiyat:<b> @Model.SecilenMenu?.MenuFiyati.ToString("0.##") TL</b> </label>
+        </div>
+        <br />
+    @foreach (var boy in Enum.GetValues(typeof(Boy)))
+    {
+        <div>
+            <input type="radio" id="@boy" name="boy" value="@boy">
+            <label for="@boy">@boy</label>
+        </div>
+    }
+            <!-- Adet eklemek için input -->
+            <label asp-for="SecilenMenu.MenuAdedi"></label>
+        <input type="number" class="form-control" asp-for="SecilenMenu.MenuAdedi" />
+    </div>
+    <!-- Sağ tarafta ekstra malzeme kategorileri -->
+    <div class="col-md-4">
+        <h2>EKSTRA MALZEMELER</h2>
+        @foreach (Kategori category in Model.EkstraMalzemeKategori)
+        {
+            <div>
+                @if(@category.KategoriID==3)
+                {
+                <h3>1.Sos Seçimi</h3>
+                <select class="form-control">
+                    <option  value="">Seçiniz</option>
+                    @foreach (SiparisEkstraMalzemeVM ekstraMalzeme in Model.SiparisEkstraMalzemeler.Where(x => x.EkstraMalzemeKategori.KategoriID == category.KategoriID))
+                    {
+
+                            <option value="@ekstraMalzeme.EkstraMalzemeId">@ekstraMalzeme.EkstraMalzemeAdi - @ekstraMalzeme.EkstraMalzemeFiyati.ToString("0.##") TL</option>
+                    }
+                </select>
+                    <h3>2.Sos Seçimi</h3>
+                        <select class="form-control">
+                        <option value="">Seçiniz</option>
+                        @foreach (SiparisEkstraMalzemeVM ekstraMalzeme in Model.SiparisEkstraMalzemeler.Where(x => x.EkstraMalzemeKategori.KategoriID == category.KategoriID))
+                        {
+
+                            <option value="@ekstraMalzeme.EkstraMalzemeId">@ekstraMalzeme.EkstraMalzemeAdi - @ekstraMalzeme.EkstraMalzemeFiyati.ToString("0.##") TL</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <h3>@category.KategoriAdi</h3>
+                        <select class="form-control">
+                        <option value="">Seçiniz</option>
+                        @foreach (SiparisEkstraMalzemeVM ekstraMalzeme in Model.SiparisEkstraMalzemeler.Where(x => x.EkstraMalzemeKategori.KategoriID == category.KategoriID))
+                        {
+
+                            <option value="@ekstraMalzeme.EkstraMalzemeId">@ekstraMalzeme.EkstraMalzemeAdi - @ekstraMalzeme.EkstraMalzemeFiyati.ToString("0.##") TL</option>
+                        }
+                    </select>
+                }
+
+                <!-- Adet eklemek için input -->
+               
+            </div>
+        }
+    <input type="submit" value="Sepete Ekle" class="btn btn-primary"/>
+    </div>
+</div>
+    </form>
+
+<p>Toplam Fiyat: @Model.ToplamFiyat </p>

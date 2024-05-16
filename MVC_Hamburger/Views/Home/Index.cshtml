@@ -3,46 +3,19 @@
 @{
 	ViewData["Title"] = "Home Page";
 }
-
 <div class="row">
+<div class="row m-0" style="height:100vh">
 	<nav class="nav nav-tabs pt-3 col-2 flex-column bg-danger text-center" style="border-radius:5px">
-		<a href="/burger-king" class="nav-item nav-link nav-link text-white"><span>Menüler</span></a>
-		<a href="/burger-king" class="nav-item nav-link nav-link text-white"><span>Burgerler</span></a>
-		<a href="/burger-king" class="nav-item nav-link nav-link text-white"><span>Kids Menüler</span></a>
-		<a href="/burger-king text-white" class="nav-item nav-link nav-link text-white"><span>Çıtır Lezzetler</span></a>
-		<a href="/burger-king" class="nav-item nav-link nav-link text-white"><span>Tatlılar</span></a>
-		<a href="/burger-king text-white" class="nav-item nav-link nav-link text-white text-white"><span>Soslar</span></a>
-		<a href="/burger-king" class="nav-item nav-link nav-link text-white"><span>İçecekler</span></a>
+		<a class="nav-item nav-link nav-link text-white" asp-action="Index" asp-controller="Home"><span>Menüler</span></a>
+		<a class="nav-item nav-link nav-link text-white" asp-action="Burgerler" asp-controller="Home"><span>Burgerler</span></a>
+		<a class="nav-item nav-link nav-link text-white"><span>Kids Menüler</span></a>
+		<a class="nav-item nav-link nav-link text-white"><span>Çıtır Lezzetler</span></a>
+		<a class="nav-item nav-link nav-link text-white"><span>Tatlılar</span></a>
+		<a class="nav-item nav-link nav-link text-white"><span>Soslar</span></a>
+		<a class="nav-item nav-link nav-link text-white"><span>İçecekler</span></a>
 	</nav>
-<div class="row text-center justify-content-between col-10 ">
+</div>
+<div>
 
-	@foreach (var item in Model.Menuler)
-	{
-		<div class="col-lg-4 col-md-4 col-sm-4 col-12 row justify-content-center">
-			<a href="#">
-				<div class="card mt-3">
-					<div class="card-header">
-						<div class="card-title"><h3>@item.Ad</h3></div>
-						<div class="card-img-top">
-							<img src="~/MenuResimleri/@item.ResimYolu" width="100%" height="150px">
-						</div>
-						<div class="card-body">
-							<span class="card-footer">
-								<span>@item.Fiyat.ToString("0.##") TL</span>
-							</span>
-							<br />
-							<span class="card-footer">
-								<span>@item.Icerik</span>
-							</span>
-							<a class="btn btn-danger" asp-route-id="@item.ID" asp-controller="Siparis" asp-action="Index">
-								Sepete Ekle
-							</a>
-							
-						</div>
-					</div>
-				</div>
-			</a>
-		</div>
-	}
 </div>
 </div>
