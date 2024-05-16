@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVC_Hamburger.Areas.YonetimPaneli.Models.ViewModels;
 using MVC_Hamburger.DAL;
@@ -7,7 +8,6 @@ using System.Diagnostics;
 
 namespace MVC_Hamburger.Controllers
 {
-
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
