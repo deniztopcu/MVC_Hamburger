@@ -34,7 +34,7 @@
 	}
 </div>
 </div> *@
-<section class="food_section layout_padding-bottom">
+<section class="food_section layout_padding">
     <div class="container">
         <div class="heading_container heading_center">
             <h2>
@@ -46,12 +46,12 @@
             <li class="active" data-filter="*">Hepsi</li>
         </ul>
         <div >
+            
+                <div class="row">
         @foreach(var item in Model.Menuler)
         {
-            <div class="filters-content">
+                    <div class="col-sm-6 col-lg-4">
                 <a class="img-hover" asp-route-id="@item.ID" asp-controller="Siparis" asp-action="SepeteEkle">
-                <div class="row grid">
-                    <div class="col-sm-6 col-lg-4 all burger">
                         <div class="box">
                             <div>
                                 <div class="img-box">
@@ -72,11 +72,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
                 </a>
-            </div>
+                    </div>
         }
+                
+            </div>
 
 
         </div>
