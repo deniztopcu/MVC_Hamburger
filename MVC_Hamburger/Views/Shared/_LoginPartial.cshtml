@@ -10,9 +10,15 @@
 
 	@if (User.IsInRole("Yonetici"))
 	{
-			<a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="Kategori" asp-action="Index">Kategoriler</a>
-			<a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="Menu" asp-action="Index">Menuler</a>
-			<a class="nav-link text-dark" asp-area="YonetimPaneli" asp-controller="EkstraMalzeme" asp-action="Index">EkstraMalzemeler</a>
+		<li class="nav-item">
+			<a class="nav-link" asp-area="YonetimPaneli" asp-controller="Kategori" asp-action="Index">Kategoriler</a>
+		</li
+		<li class="nav-item">
+			<a class="nav-link" asp-area="YonetimPaneli" asp-controller="Menu" asp-action="Index">Menuler</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-area="YonetimPaneli" asp-controller="EkstraMalzeme" asp-action="Index">EkstraMalzemeler</a>
+			</li>
 		<p>Merhaba @UserManager.GetUserName(User)</p>
 
 
@@ -20,7 +26,8 @@
 	else
 	{
 		<p>Merhaba @UserManager.GetUserName(User)</p>
-			<a asp-controller="Home" asp-action="Index"></a>
+		<li class="nav-item">
+			<a asp-controller="Home" asp-action="Index"></a></li>
 
 	}
 		<a asp-controller="Login" asp-action="LogOut" class="btn btn-warning">Çıkış</a>
@@ -28,8 +35,8 @@
 else
 {
 @* 	<div class="ml-auto"> *@
-				<a asp-controller="Login" asp-action="Login" class="btn btn-danger">Login</a>
-				<a asp-controller="Login" asp-action="Register" class="btn btn-danger">Register</a>
+				<a asp-controller="Login" asp-action="Login" class="btn btn-warning">Login</a>
+				<a asp-controller="Login" asp-action="Register" class="btn btn-warning">Register</a>
 	@* @* </div> *@
 
 
