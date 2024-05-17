@@ -6,17 +6,20 @@ namespace MVC_Hamburger.Models.ViewModels
 {
 	public class SiparisVM
 	{
-		public int? SiparisId { get; set; }
-		public decimal? ToplamFiyat { get; set; }
-		public int? UyeID { get; set; }
-		public ICollection<SiparisEkstraMalzemeVM>? SiparisEkstraMalzemeler { get; set; }
-		public SiparisMenuVM? SecilenMenu { get; set; }
-        public Boy? Boy { get; set; }
-
-        // Ekstra malzeme kategorileri
-        public ICollection<Kategori>? EkstraMalzemeKategori { get; set; }
-
-		// Kategoriye göre ekstra malzemelerin seçim listeleri
-		public Dictionary<int, SelectList>? EkstraMalzemelerinKategorisi { get; set; }
-	}
+        public SiparisVM()
+        {
+            EMKategoriler = new List<EMKategoriVM>();
+            SecilenEkstraMalzemeIDler = new List<int>();
+        }
+        public int SiparisVMID { get; set; }
+        public decimal? ToplamFiyat { get; set; }
+        public int? UyeID { get; set; }
+        public Menu? SecilenMenu { get; set; }
+        public int MenuAdedi { get; set; }
+        public SelectList GelenMenulerSL { get; set; }
+        public SiparisMenuVM? GelenMenu { get; set; }
+        public Boy SecilenBoy { get; set; }
+        public List<EMKategoriVM>? EMKategoriler { get; set; }
+        public List<int> SecilenEkstraMalzemeIDler { get; set; }
+    }
 }
