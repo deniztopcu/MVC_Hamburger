@@ -82,19 +82,25 @@ namespace MVC_Hamburger.Controllers
         public IActionResult SepeteEkle(SiparisVM siparisVm)
         {
             sepettekiSiparisler.Add(siparisVm);
-            SiparisMenu menu = new SiparisMenu();
-            menu.MenuID = siparisVm.SecilenMenu.ID;
+            //SiparisMenu menu = new SiparisMenu();
+            //menu.MenuID = siparisVm.SecilenMenu.ID;
 
-            foreach (var ekstraMalzeme in siparisVm.SecilenEkstraMalzemeIDler)
-            {
-                var newEntity = new SiparisEkstraMalzeme
-                {
-                    SiparisID = siparisVm.SiparisVMID,
-                    EkstraMalzemeID = Convert.ToInt32(ekstraMalzeme)
-                };
-            }
+            //foreach (var ekstraMalzeme in siparisVm.SecilenEkstraMalzemeIDler)
+            //{
+            //    var newEntity = new SiparisEkstraMalzeme
+            //    {
+            //        SiparisID = siparisVm.SiparisVMID,
+            //        EkstraMalzemeID = Convert.ToInt32(ekstraMalzeme)
+            //    };
+            //}
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("SepetListele", "Siparis");
+        }
+
+        public IActionResult SepetListele(List<SiparisVM> siparisler)
+        {
+            siparisler = sepettekiSiparisler;
+            return View(siparisler);    
         }
         public int GetUserID()
         {

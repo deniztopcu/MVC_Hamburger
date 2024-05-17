@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MVC_Hamburger.Models.ViewModels.SiparisVM>
+
+@{
+    ViewData["Title"] = "SepetListele";
+}
+
+<h1>SepetListele</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SiparisVMID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToplamFiyat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UyeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MenuAdedi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecilenBoy)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiparisVMID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToplamFiyat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UyeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuAdedi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecilenBoy)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
