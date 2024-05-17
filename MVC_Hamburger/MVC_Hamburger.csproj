@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -27,6 +27,37 @@
 
   <ItemGroup>
     <Folder Include="Areas\YonetimPaneli\Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\bootstrap.css" />
+    <None Include="wwwroot\css\font-awesome.min.css" />
+    <None Include="wwwroot\css\responsive.css" />
+    <None Include="wwwroot\css\style.css" />
+    <None Include="wwwroot\css\style.css.map" />
+    <None Include="wwwroot\css\style.scss" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\images\about-img.png" />
+    <None Include="wwwroot\images\client1.jpg" />
+    <None Include="wwwroot\images\client2.jpg" />
+    <None Include="wwwroot\images\f1.png" />
+    <None Include="wwwroot\images\f2.png" />
+    <None Include="wwwroot\images\f3.png" />
+    <None Include="wwwroot\images\f4.png" />
+    <None Include="wwwroot\images\f5.png" />
+    <None Include="wwwroot\images\f6.png" />
+    <None Include="wwwroot\images\f7.png" />
+    <None Include="wwwroot\images\f8.png" />
+    <None Include="wwwroot\images\f9.png" />
+    <None Include="wwwroot\images\favicon.png" />
+    <None Include="wwwroot\images\hero-bg.jpg" />
+    <None Include="wwwroot\images\o1.jpg" />
+    <None Include="wwwroot\images\o2.jpg" />
+    <None Include="wwwroot\js\bootstrap.js" />
+    <None Include="wwwroot\js\custom.js" />
+    <None Include="wwwroot\js\jquery-3.4.1.min.js" />
   </ItemGroup>
 
 </Project>
