@@ -1,4 +1,4 @@
-﻿<div class="row card-container">
+﻿@* <div class="row card-container">
 	<nav class="nav nav-tabs pt-3 col-2 flex-column bg-danger text-center" style="border-radius:5px">
 		<a class="nav-item nav-link nav-link text-white" asp-action="Index" asp-controller="Home"><span>Menüler</span></a>
 		<a class="nav-item nav-link nav-link text-white" asp-action="Burgerler" asp-controller="Home"><span>Burgerler</span></a>
@@ -33,4 +33,52 @@
 		</div>
 	}
 </div>
-</div>
+</div> *@
+<section class="food_section layout_padding-bottom">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>
+                Menüler
+            </h2>
+        </div>
+
+        <ul class="filters_menu">
+            <li class="active" data-filter="*">Hepsi</li>
+        </ul>
+        <div >
+        @foreach(var item in Model.Menuler)
+        {
+            <div class="filters-content">
+                <a class="img-hover" asp-route-id="@item.ID" asp-controller="Siparis" asp-action="SepeteEkle">
+                <div class="row grid">
+                    <div class="col-sm-6 col-lg-4 all burger">
+                        <div class="box">
+                            <div>
+                                <div class="img-box">
+                                    <img src="~/MenuResimleri/@item.ResimYolu" alt="">
+                                </div>
+                                <div class="detail-box">
+                                    <h5>
+                                        @item.Ad
+                                    </h5>
+                                    <p>
+                                        @item.Icerik
+                                    </p>
+                                    <div class="options">
+                                        <h6>
+                                            @item.Fiyat.ToString("0.##") TL
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+            </div>
+        }
+
+
+        </div>
+    </div>
+</section>

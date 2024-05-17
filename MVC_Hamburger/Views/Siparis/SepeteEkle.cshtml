@@ -6,6 +6,7 @@
 }
     <form asp-action="SepeteEkle" method="post" class="container" enctype="multipart/form-data">
 <div class="row">
+    <br /><br />
     <!-- Sol tarafta menü listesi -->
 
     
@@ -76,9 +77,8 @@
                
             </div>
         }
+            <p><b>Toplam Fiyat: @Model.ToplamFiyat</b> </p>
     <input type="submit" value="Sepete Ekle" class="btn btn-primary"/>
     </div>
 </div>
     </form>
-
-<p>Toplam Fiyat: @Model.ToplamFiyat </p>
