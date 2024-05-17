@@ -8,10 +8,14 @@ using System.Diagnostics;
 
 namespace MVC_Hamburger.Controllers
 {
+    [Authorize(Roles = "Yonetici, Musteri")]
+    
     public class HomeController : Controller
+
     {
         private readonly ILogger<HomeController> _logger;
         private readonly HamburgerDbContext _context;
+
         public HomeController(HamburgerDbContext context)
         {
             _context = context;
@@ -35,5 +39,6 @@ namespace MVC_Hamburger.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

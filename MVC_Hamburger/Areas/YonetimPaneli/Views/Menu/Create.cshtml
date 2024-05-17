@@ -5,12 +5,13 @@
     Layout = "_AdminLayout";
 }
 
-<h1>Create</h1>
-
-<h4>Menu</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="hero_area text-white">
+    <div class="bg-box">
+        <img src="~/images/hero-bg-sade.jpg" alt="">
+    </div>
+    <div class="row ml-5">
+        <div class="col-md-4">
+            <h1 style="color:white">Menü Ekle</h1>
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -34,15 +35,16 @@
                 <span asp-validation-for="MenuEkle.MenuIcerik" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Ekle" class="btn btn-warning" />
             </div>
         </form>
+            <a asp-action="Index" class="btn btn-warning">Listeye Geri Dön</a>
     </div>
 </div>
 
 <div asp-validation-summary="All" lang="tr"></div>
-<div>
-    <a asp-action="Index">Back to List</a>
+
+    
 </div>
 
 @section Scripts {

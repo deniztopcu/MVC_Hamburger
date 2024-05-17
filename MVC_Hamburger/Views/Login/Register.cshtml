@@ -1,15 +1,16 @@
 ﻿@model MVC_Hamburger.Models.ViewModels.RegisterVM
 
 @{
-    Layout = "_AdminLayout";
+    Layout = "_LoginLayout";
 }
+<div class="hero_area text-white">
+    <div class="bg-box">
+        <img src="~/images/hero-bg-sade.jpg" alt="">
 
-<h1>Register</h1>
-
-<h4>Register_VM</h4>
-<hr />
-<div class="row">
+    </div>
+<div class="row ml-5">
     <div class="col-md-4">
+            <h1 style="color:white">Kaydol</h1>
         <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -33,14 +34,11 @@
                 <span asp-validation-for="SifreTekrari" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Kaydol" class="btn btn-warning" />
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

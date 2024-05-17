@@ -50,7 +50,7 @@ namespace MVC_Hamburger.Controllers
         {
             await _signInManager.SignOutAsync();
             //return RedirectToAction("Index", "Home");
-            return Redirect("~/Home/Index");
+            return Redirect("~/Login/Login");
             //return LocalRedirect("~/localhost:5168/Home/Index");
         }
 

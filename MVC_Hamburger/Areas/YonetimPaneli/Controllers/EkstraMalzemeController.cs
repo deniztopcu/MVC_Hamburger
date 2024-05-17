@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -17,14 +18,20 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
     public class EkstraMalzemeController : Controller
     {
         private readonly HamburgerDbContext _context;
+        private readonly SignInManager<Uye> _signInManager;
+        private readonly UserManager<Uye> _userManager;
 
-        public EkstraMalzemeController(HamburgerDbContext context)
-        {
-            _context = context;
-        }
+		public EkstraMalzemeController(HamburgerDbContext context, SignInManager<Uye> signInManager, UserManager<Uye> userManager)
+		{
+			_context = context;
+			_signInManager = signInManager;
+			_userManager = userManager;
+		}
 
-        // GET: YonetimPaneli/EkstraMalzeme
-        public async Task<IActionResult> Index()
+
+
+		// GET: YonetimPaneli/EkstraMalzeme
+		public async Task<IActionResult> Index()
         {
             var hamburgerDbContext = _context.EkstraMalzemeler.Include(e => e.Kategori);
             return View(await hamburgerDbContext.ToListAsync());
@@ -73,6 +80,14 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
             ViewData["KategoriID"] = new SelectList(_context.Kategoriler, "KategoriID", "KategoriAdi", ekstraMalzeme.KategoriID);
             return View(ekstraMalzeme);
         }
+
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+			return Redirect("~/Login/Login");
+			//return LocalRedirect("~/localhost:5168/Home/Index");
+		}
+
 
         // GET: YonetimPaneli/EkstraMalzeme/Edit/5
         public async Task<IActionResult> Edit(int? id)

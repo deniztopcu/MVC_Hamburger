@@ -1,39 +1,6 @@
-﻿@* <div class="row card-container">
-	<nav class="nav nav-tabs pt-3 col-2 flex-column bg-danger text-center" style="border-radius:5px">
-		<a class="nav-item nav-link nav-link text-white" asp-action="Index" asp-controller="Home"><span>Menüler</span></a>
-		<a class="nav-item nav-link nav-link text-white" asp-action="Burgerler" asp-controller="Home"><span>Burgerler</span></a>
-		<a class="nav-item nav-link nav-link text-white"><span>Kids Menüler</span></a>
-		<a class="nav-item nav-link nav-link text-white"><span>Çıtır Lezzetler</span></a>
-		<a class="nav-item nav-link nav-link text-white"><span>Tatlılar</span></a>
-		<a class="nav-item nav-link nav-link text-white"><span>Soslar</span></a>
-		<a class="nav-item nav-link nav-link text-white"><span>İçecekler</span></a>
-	</nav>
-
-<div class="row text-center justify-content-between col-10">
-
-	@foreach (var item in Model.Menuler)
-	{
-		
-		<div class="col-lg-4 col-md-4 col-sm-4 col-8 row justify-content-center">
-				<a class="img-hover" asp-route-id="@item.ID" asp-controller="Siparis" asp-action="SepeteEkle">
-				<div class="card mt-3">
-					<div class="card-header">
-						<div class="card-title"><h3>@item.Ad</h3></div>
-						<div class="card-img-top">
-							<img src="~/MenuResimleri/@item.ResimYolu" width="100%" height="150px">
-						</div>
-						<div class="card-body">
-								<span class="card-text">@item.Fiyat.ToString("0.##") TL</span>
-							<br />
-								<span class="card-text">@item.Icerik</span>
-						</div>
-					</div>
-				</div>
-			</a>
-		</div>
-	}
-</div>
-</div> *@
+﻿@{
+    Layout = "_Layout2";
+}
 <section class="food_section layout_padding">
     <div class="container">
         <div class="heading_container heading_center">
@@ -45,37 +12,37 @@
         <ul class="filters_menu">
             <li class="active" data-filter="*">Hepsi</li>
         </ul>
-        <div >
-            
-                <div class="row">
-        @foreach(var item in Model.Menuler)
-        {
+        <div>
+
+            <div class="row">
+                @foreach (var item in Model.Menuler)
+                {
                     <div class="col-sm-6 col-lg-4">
-                <a class="img-hover" asp-route-id="@item.ID" asp-controller="Siparis" asp-action="SepeteEkle">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="~/MenuResimleri/@item.ResimYolu" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        @item.Ad
-                                    </h5>
-                                    <p>
-                                        @item.Icerik
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            @item.Fiyat.ToString("0.##") TL
-                                        </h6>
+                        <a class="img-hover" asp-route-id="@item.ID" asp-controller="Siparis" asp-action="SepeteEkle">
+                            <div class="box">
+                                <div>
+                                    <div class="img-box">
+                                        <img src="~/MenuResimleri/@item.ResimYolu" alt="">
+                                    </div>
+                                    <div class="detail-box">
+                                        <h5>
+                                            @item.Ad
+                                        </h5>
+                                        <p>
+                                            @item.Icerik
+                                        </p>
+                                        <div class="options">
+                                            <h6>
+                                                @item.Fiyat.ToString("0.##") TL
+                                            </h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                </a>
+                        </a>
                     </div>
-        }
-                
+                }
+
             </div>
 
 
