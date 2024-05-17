@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVC_Hamburger.Models.ViewModels.SiparisVM>
+﻿@model IEnumerable<MVC_Hamburger.Models.ViewModels.SepetDTO>
 
 @{
     ViewData["Title"] = "SepetListele";
@@ -13,47 +13,71 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SiparisVMID)
+                @Html.DisplayNameFor(model => model.SiparisID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ToplamFiyat)
+                <p>Menü Adı</p>
+                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UyeID)
+                <p>Menü İçeriği</p>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MenuAdedi)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SecilenBoy)
+                Menü Boyu
             </th>
+
+            <th>
+                Ekstra Malzemeler
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiparisFiyati)
+            </th>
+
+
+
+
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SiparisVMID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToplamFiyat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UyeID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MenuAdedi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SecilenBoy)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SiparisID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SepetMenu.Ad)
+                </td>                
+                <td>
+                    @Html.DisplayFor(modelItem => item.SepetMenu.Icerik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MenuAdedi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SiparisBoyu)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.EkstraMalzemeDetay)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.SiparisFiyati)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+        <P>Toplam Fiyat:@ViewBag.ToplamFiyat</P>
     </tbody>
 </table>

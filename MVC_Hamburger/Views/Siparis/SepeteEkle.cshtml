@@ -20,6 +20,7 @@
                 <label asp-for="GelenMenu.MenuIcerik">İçindekiler: @Model.GelenMenu?.MenuIcerik</label>
                 <br />
                 <label asp-for="GelenMenu.MenuFiyati">Fiyat:<b> @Model.GelenMenu?.MenuFiyati.ToString("0.##") TL</b> </label>
+                
             </div>
             <br />
             <div class="form-group">
@@ -41,6 +42,8 @@
             <!-- Adet eklemek için input -->
             <label asp-for="MenuAdedi">Menü Adedi Seç</label>
             <input type="number" class="form-control" asp-for="MenuAdedi" min="1" />
+            <input type="hidden" asp-for="GelenMenu.MenuFiyati" />
+            
         </div>
         <!-- Sağ tarafta ekstra malzeme kategorileri -->
         <div class="col-md-4">

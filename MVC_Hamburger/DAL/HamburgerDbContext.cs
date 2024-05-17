@@ -25,7 +25,7 @@ namespace MVC_Hamburger.DAL
         public DbSet<Menu> Menuler { get; set; }
         public DbSet<Siparis> Siparisler { get; set; }
         public DbSet<SiparisEkstraMalzeme> SiparisEkstraMalzemeler { get; set; }
-        public DbSet<SiparisMenu> SiparisMenuler { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

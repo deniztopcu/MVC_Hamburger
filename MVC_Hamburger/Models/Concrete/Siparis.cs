@@ -17,7 +17,10 @@ namespace MVC_Hamburger.Models.Concrete
 
         public Uye Uye { get; set; }
 
-        public ICollection<SiparisMenu>? SiparisMenuler { get; set; }
+        public int MenuID { get; set; }
+        public int MenuAdedi { get; set; }    
+        public Menu? Menu{ get; set; }
+
 
         public ICollection<SiparisEkstraMalzeme>? SiparisEkstraMalzemeler { get; set; }
     }

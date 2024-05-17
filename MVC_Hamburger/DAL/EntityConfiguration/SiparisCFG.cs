@@ -11,6 +11,7 @@ namespace MVC_Hamburger.DAL.EntityConfiguration
             builder.HasKey(x => x.ID);
             builder.Property(x => x.ToplamFiyat).HasColumnType("money");
             builder.Property(x => x.Boy).HasConversion<string>();
+            builder.HasOne(x => x.Menu).WithMany(x => x.Siparisler).HasForeignKey(x => x.MenuID);
         }
     }
 }
