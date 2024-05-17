@@ -13,7 +13,7 @@ namespace MVC_Hamburger.Controllers
         private readonly HamburgerDbContext _context;
         private readonly UserManager<Uye> _userManager;
 
-        public static List<SiparisVM> sepettekiSiparisler=new List<SiparisVM>();
+        public static List<SepetDTO> sepettekiSiparisler=new List<SepetDTO>();
         public SiparisController(HamburgerDbContext context, UserManager<Uye> userManager)
         {
             _context = context;
@@ -81,7 +81,38 @@ namespace MVC_Hamburger.Controllers
         [HttpPost]
         public IActionResult SepeteEkle(SiparisVM siparisVm)
         {
-            sepettekiSiparisler.Add(siparisVm);
+
+            
+            SepetDTO sepetDTO = new SepetDTO();
+            sepetDTO.UyeID = GetUserID();
+            var ekstraMalzemeler = _context.EkstraMalzemeler.Include(x => x.Kategori).ToList();
+            List<int> emIdler = siparisVm.SecilenEkstraMalzemeIDler.Select(int.Parse).ToList();
+            sepetDTO.EkstraMalzemeIdler = emIdler;  
+            string emDetay = "";
+            decimal emToplam = 0;
+            foreach(var item in ekstraMalzemeler)
+            {
+                if (emIdler.Contains(item.ID))
+                    emDetay += $"Seçilen {item.Kategori.KategoriAdi}:{item.Ad} Fiyat:{item.Fiyat}";
+                emToplam += item.Fiyat;
+            }
+
+            sepetDTO.EkstraMalzemeDetay= emDetay;
+            sepetDTO.MenuAdedi = siparisVm.MenuAdedi;
+
+            sepetDTO.SiparisBoyu = siparisVm.SecilenBoy;
+            
+            sepetDTO.SepetMenu = _context.Menuler.Find(siparisVm.SecilenMenu.ID);
+
+            sepetDTO.SiparisID = siparisVm.SiparisVMID;
+
+            sepetDTO.SiparisFiyati = (sepetDTO.SepetMenu.Fiyat * sepetDTO.MenuAdedi) + emToplam;
+
+            sepettekiSiparisler.Add(sepetDTO);
+
+            
+            
+            
             //SiparisMenu menu = new SiparisMenu();
             //menu.MenuID = siparisVm.SecilenMenu.ID;
 
@@ -97,9 +128,17 @@ namespace MVC_Hamburger.Controllers
             return RedirectToAction("SepetListele", "Siparis");
         }
 
-        public IActionResult SepetListele(List<SiparisVM> siparisler)
+        public IActionResult SepetListele(List<SepetDTO> siparisler)
         {
             siparisler = sepettekiSiparisler;
+
+            ViewBag.ToplamFiyat = 0;
+
+            foreach (var item in siparisler) 
+            { 
+                ViewBag.ToplamFiyat+=item.SiparisFiyati;
+            }
+            
             return View(siparisler);    
         }
         public int GetUserID()
