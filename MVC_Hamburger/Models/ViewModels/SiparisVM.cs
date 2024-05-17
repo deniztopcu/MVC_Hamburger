@@ -8,9 +8,9 @@ namespace MVC_Hamburger.Models.ViewModels
 	{
         public SiparisVM()
         {
-            EMKategoriler = new List<EMKategoriVM>();
-            SecilenEkstraMalzemeIDler = new List<int>();
-        }
+            //EMKategoriler = new List<EMKategoriVM>();
+            //SecilenEkstraMalzemeIDler = new List<str>();
+        } 
         public int SiparisVMID { get; set; }
         public decimal? ToplamFiyat { get; set; }
         public int? UyeID { get; set; }
@@ -19,7 +19,7 @@ namespace MVC_Hamburger.Models.ViewModels
         public SelectList GelenMenulerSL { get; set; }
         public SiparisMenuVM? GelenMenu { get; set; }
         public Boy SecilenBoy { get; set; }
-        public List<EMKategoriVM>? EMKategoriler { get; set; }
-        public List<int> SecilenEkstraMalzemeIDler { get; set; }
+        public List<EMKategoriVM>? EMKategoriler { get; set; } = new List<EMKategoriVM>();
+        public List<string> SecilenEkstraMalzemeIDler { get; set; } = new List<string>();
     }
 }

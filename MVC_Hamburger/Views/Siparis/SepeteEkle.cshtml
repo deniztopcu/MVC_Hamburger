@@ -45,13 +45,24 @@
         <!-- Sağ tarafta ekstra malzeme kategorileri -->
         <div class="col-md-4">
             <h2>EKSTRA MALZEMELER</h2>
-            @for (int i = 0; i < Model.EMKategoriler.Count; i++)
+            @foreach (var emKategori in Model.EMKategoriler)
+            {
+                <input name="KategoriID" style="display:none;" />
+                <label>@emKategori.KategoriAdi</label>
+                <select class="form-control" name="SecilenEkstraMalzemeIDler">
+                    @foreach (var ekstraMalzeme in emKategori.EkstraMalzemeler)
+                    {
+                        <option value="@ekstraMalzeme.Value" >@ekstraMalzeme.Text</option>
+                    }
+                </select>
+            }
+           @*  @for (int i = 0; i < Model.EMKategoriler.Count; i++)
             {
                 if (Model.SecilenEkstraMalzemeIDler == null)
                 {
                     Model.SecilenEkstraMalzemeIDler = new List<int>();
                 }
-                Model.SecilenEkstraMalzemeIDler.Add(i);
+                
                 <div>
 
                     <label asp-for="@Model.EMKategoriler[i].SecilenEkstraMalzemeID">@Model.EMKategoriler[i].KategoriAdi</label>
@@ -60,7 +71,7 @@
 
                     </select>
                 </div>
-            }
+            } *@
 
 
 <p>Toplam Fiyat: @Model.ToplamFiyat </p>

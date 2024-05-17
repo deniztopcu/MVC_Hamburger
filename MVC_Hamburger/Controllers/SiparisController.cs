@@ -85,30 +85,14 @@ namespace MVC_Hamburger.Controllers
             SiparisMenu menu = new SiparisMenu();
             menu.MenuID = siparisVm.SecilenMenu.ID;
 
-            //menu.SiparisID=siparis.ID;
-            //menu.MenuAdedi = siparisVm.MenuAdedi;
-            //siparis.SiparisMenuler.Add(menu);
-            //siparis.ToplamFiyat += siparisVm.SecilenMenu.Fiyat*siparisVm.MenuAdedi;
-            //siparis.Boy = siparisVm.SecilenBoy;
-            //siparis.UyeID = GetUserID();
-
-
-            //foreach(var item in siparisVm.EMKategoriler)
-            //{
-            //    SiparisEkstraMalzeme malzeme = new SiparisEkstraMalzeme();
-            //    malzeme.SiparisID = siparis.ID;
-            //    malzeme.EkstraMalzemeID = item.SecilenEkstraMalzemeID;
-            //    siparis.ToplamFiyat += GetEmFiyatById(item.SecilenEkstraMalzemeID);
-            //    siparis.SiparisEkstraMalzemeler.Add(malzeme);
-
-            //}
-
-
-
-
-
-
-
+            foreach (var ekstraMalzeme in siparisVm.SecilenEkstraMalzemeIDler)
+            {
+                var newEntity = new SiparisEkstraMalzeme
+                {
+                    SiparisID = siparisVm.SiparisVMID,
+                    EkstraMalzemeID = Convert.ToInt32(ekstraMalzeme)
+                };
+            }
 
             return RedirectToAction("Index", "Home");
         }
