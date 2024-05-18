@@ -5,6 +5,7 @@ using MVC_Hamburger.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using MVC_Hamburger.Models.Enums;
 
 namespace MVC_Hamburger.Controllers
 {
@@ -17,14 +18,15 @@ namespace MVC_Hamburger.Controllers
         public SiparisController(HamburgerDbContext context, UserManager<Uye> userManager)
         {
             _context = context;
-            model = new SiparisVM();
+            
             this._userManager = userManager;
 
         }
-        SiparisVM model;
+        
 
         public IActionResult SepeteEkle(int? id)
         {
+            SiparisVM model = new SiparisVM();
             model.GelenMenu = _context.Menuler
                 .Where(sm => sm.ID == id)
                 .Select(sm => new SiparisMenuVM
@@ -50,14 +52,14 @@ namespace MVC_Hamburger.Controllers
                     {
                         KategoriID = category.KategoriID,
                         KategoriAdi = $"1.{category.KategoriAdi} Seçimi",
-                        EkstraMalzemeler = new SelectList(category.EkstraMalzemeler, "ID", "Ad")
+                        EkstraMalzemeler = new SelectList(category.EkstraMalzemeler.Select(em => new { em.ID, AdFiyat = $"{em.Ad} - {em.Fiyat.ToString("0.##")} TL" }), "ID", "AdFiyat")
                     };
 
                     var categoryViewModel2 = new EMKategoriVM
                     {
                         KategoriID = category.KategoriID,
                         KategoriAdi = $"2.{category.KategoriAdi} Seçimi",
-                        EkstraMalzemeler = new SelectList(category.EkstraMalzemeler, "ID", "Ad")
+                        EkstraMalzemeler = new SelectList(category.EkstraMalzemeler.Select(em => new { em.ID, AdFiyat = $"{em.Ad} - {em.Fiyat.ToString("0.##")} TL" }), "ID", "AdFiyat")
                     };
                     model.EMKategoriler.Add(categoryViewModel1);
                     model.EMKategoriler.Add(categoryViewModel2);
@@ -68,7 +70,7 @@ namespace MVC_Hamburger.Controllers
                     {
                         KategoriID = category.KategoriID,
                         KategoriAdi = category.KategoriAdi,
-                        EkstraMalzemeler = new SelectList(category.EkstraMalzemeler, "ID", "Ad")
+                        EkstraMalzemeler = new SelectList(category.EkstraMalzemeler.Select(em => new { em.ID, AdFiyat = $"{em.Ad} - {em.Fiyat.ToString("0.##")} TL" }), "ID", "AdFiyat")
                     };
 
                     model.EMKategoriler.Add(categoryViewModel);
@@ -81,7 +83,6 @@ namespace MVC_Hamburger.Controllers
         [HttpPost]
         public IActionResult SepeteEkle(SiparisVM siparisVm)
         {
-
             
             SepetDTO sepetDTO = new SepetDTO();
             sepetDTO.UyeID = GetUserID();
@@ -90,12 +91,15 @@ namespace MVC_Hamburger.Controllers
             sepetDTO.EkstraMalzemeIdler = emIdler;  
             string emDetay = "";
             decimal emToplam = 0;
-            foreach(var item in ekstraMalzemeler)
-            {
-                if (emIdler.Contains(item.ID))
+            foreach(var emID in emIdler)
+            {                
+                foreach(var em in ekstraMalzemeler)
                 {
-                    emDetay += $" Seçilen {item.Kategori.KategoriAdi}:{item.Ad} Fiyat:{item.Fiyat.ToString("0.##")} TL";
-                    emToplam += item.Fiyat;
+                    if(em.ID==emID)
+                    {
+                        emDetay += $"Seçilen {em.Kategori.KategoriAdi}:{em.Ad} {em.Fiyat.ToString("0.##")} TL- ";
+                        emToplam += em.Fiyat;
+                    }                    
                 }
             }
 
@@ -105,8 +109,13 @@ namespace MVC_Hamburger.Controllers
             sepetDTO.SiparisBoyu = siparisVm.SecilenBoy;
             
             sepetDTO.SepetMenu = _context.Menuler.Find(siparisVm.SecilenMenu.ID);
+            sepetDTO.SepetMenuID = siparisVm.SecilenMenu.ID;
 
             sepetDTO.SepetID = siparisVm.SiparisVMID;
+            if(sepetDTO.SiparisBoyu==Boy.Buyuk)           
+                sepetDTO.SepetMenu.Fiyat += 20;           
+            else if (sepetDTO.SiparisBoyu == Boy.Orta)
+                sepetDTO.SepetMenu.Fiyat += 10;
 
             sepetDTO.SiparisFiyati = (sepetDTO.SepetMenu.Fiyat * sepetDTO.MenuAdedi) + emToplam;
 
@@ -114,34 +123,21 @@ namespace MVC_Hamburger.Controllers
 
             
             
-            
-            //SiparisMenu menu = new SiparisMenu();
-            //menu.MenuID = siparisVm.SecilenMenu.ID;
 
-            //foreach (var ekstraMalzeme in siparisVm.SecilenEkstraMalzemeIDler)
-            //{
-            //    var newEntity = new SiparisEkstraMalzeme
-            //    {
-            //        SiparisID = siparisVm.SiparisVMID,
-            //        EkstraMalzemeID = Convert.ToInt32(ekstraMalzeme)
-            //    };
-            //}
 
             return RedirectToAction("SepetListele", "Siparis");
         }
         public IActionResult SepettenSil(int id)
         {
-            var sepettekiSiparis = sepettekiSiparisler.FirstOrDefault(x=>x.SepetID==id);
+            var sepettekiSiparis = sepettekiSiparisler.Where(x => x.UyeID == GetUserID()).FirstOrDefault(x => x.SepetID == id);
             sepettekiSiparisler.Remove(sepettekiSiparis);
             return RedirectToAction("SepetListele", "Siparis");
         }
 
-
-            
-       
+ 
         public IActionResult SepetListele(List<SepetDTO> siparisler)
         {
-            siparisler = sepettekiSiparisler;
+            siparisler = sepettekiSiparisler.Where(x=>x.UyeID==GetUserID()).ToList();
 
             decimal toplamFiyat= 0;
             
@@ -158,7 +154,7 @@ namespace MVC_Hamburger.Controllers
         public IActionResult SiparisOnayla()
         {
 
-            foreach (var item in sepettekiSiparisler)
+            foreach (var item in sepettekiSiparisler.Where(x=>x.UyeID==GetUserID()))
             {
                 Siparis yeniSiparis = new Siparis();
                 yeniSiparis.MenuID = item.SepetMenu.ID;
@@ -167,11 +163,9 @@ namespace MVC_Hamburger.Controllers
                 yeniSiparis.UyeID = item.UyeID;
                 yeniSiparis.Boy = item.SiparisBoyu;
 
-                // Önce Siparişi Ekle
                 _context.Siparisler.Add(yeniSiparis);
-                _context.SaveChanges(); // Bu aşamada ID değeri oluşturulmuş olacak
+                _context.SaveChanges();
 
-                // Eklenen siparişin ID değerini kullanarak ekstra malzemeleri ekle
                 foreach (var emID in item.EkstraMalzemeIdler)
                 {
                     SiparisEkstraMalzeme sem = new SiparisEkstraMalzeme();
@@ -180,11 +174,25 @@ namespace MVC_Hamburger.Controllers
                     _context.SiparisEkstraMalzemeler.Add(sem);
                 }
 
-                _context.SaveChanges(); // Ekstra malzemeleri kaydet
+                _context.SaveChanges();
+                  
             }
-
-            return RedirectToAction("Burgerler", "Home");
+            sepettekiSiparisler.RemoveAll(x => x.UyeID == GetUserID());
+            return RedirectToAction("Siparislerim", "Siparis");
         }
+
+        public IActionResult SiparisGuncelle (int id)
+        {
+            SepetDTO sepettekiSiparis = sepettekiSiparisler.Where(x => x.UyeID == GetUserID()).FirstOrDefault(x => x.SepetID == id);
+
+
+            int menuID = sepettekiSiparis.SepetMenuID;
+
+            sepettekiSiparisler.Remove(sepettekiSiparis);
+            return RedirectToAction("SepeteEkle", "Siparis", new { id = menuID });
+           
+        }
+
 
         public IActionResult Siparislerim()
         {
@@ -197,6 +205,7 @@ namespace MVC_Hamburger.Controllers
             }
             return View(uyeSiparisler);
         }
+
         public int GetUserID()
         {
             return int.Parse(_userManager.GetUserId(User));

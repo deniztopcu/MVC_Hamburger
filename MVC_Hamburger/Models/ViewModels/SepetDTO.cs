@@ -19,6 +19,8 @@ namespace MVC_Hamburger.Models.ViewModels
 
         public Menu SepetMenu { get; set; }
 
+        public int SepetMenuID {  get; set; }   
+
         public DateTime OlusturulmaTarihi { get; set; } = DateTime.Now;
 
         public int UyeID { get; set; }  
