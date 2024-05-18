@@ -20,20 +20,27 @@
                 <label asp-for="GelenMenu.MenuIcerik">İçindekiler: @Model.GelenMenu?.MenuIcerik</label>
                 <br />
                 <label asp-for="GelenMenu.MenuFiyati">Fiyat:<b> @Model.GelenMenu?.MenuFiyati.ToString("0.##") TL</b> </label>
-                
+
             </div>
             <br />
             <div class="form-group">
                 <label>Menü Boyu Seçiniz:</label><br />
                 @foreach (Boy boy in Enum.GetValues(typeof(Boy)))
                 {
-                    @if (boy == Boy.Orta)
+                    @if (boy == Boy.Kucuk)
                     {
-                        <input type="radio" asp-for="SecilenBoy" value="@boy" checked /> @boy
+                        <input type="radio" asp-for="SecilenBoy" value="@boy " checked />
+                        <label for="SecilenBoy">@boy</label>
                     }
-                    else
+                    else if (boy == Boy.Orta)
                     {
-                        <input type="radio" asp-for="SecilenBoy" value="@boy" /> @boy
+                        <input type="radio" asp-for="SecilenBoy" value="@boy" />
+                        <label for="SecilenBoy">@boy + 10TL</label>
+                    }
+                    else if (boy == Boy.Buyuk)
+                    {
+                        <input type="radio" asp-for="SecilenBoy" value="@boy" />
+                        <label for="SecilenBoy">@boy + 20TL</label>
                     }
 
                 }
@@ -43,8 +50,8 @@
             <label asp-for="MenuAdedi">Menü Adedi Seç</label>
             <input type="number" class="form-control" asp-for="MenuAdedi" min="1" />
             <input type="hidden" asp-for="GelenMenu.MenuFiyati" />
-            
         </div>
+                
         <!-- Sağ tarafta ekstra malzeme kategorileri -->
         <div class="col-md-4">
             <h2>EKSTRA MALZEMELER</h2>
@@ -55,33 +62,19 @@
                 <select class="form-control" name="SecilenEkstraMalzemeIDler">
                     @foreach (var ekstraMalzeme in emKategori.EkstraMalzemeler)
                     {
-                        <option value="@ekstraMalzeme.Value" >@ekstraMalzeme.Text</option>
+                        <option value="@ekstraMalzeme.Value">@ekstraMalzeme.Text</option>
                     }
                 </select>
             }
-           @*  @for (int i = 0; i < Model.EMKategoriler.Count; i++)
-            {
-                if (Model.SecilenEkstraMalzemeIDler == null)
-                {
-                    Model.SecilenEkstraMalzemeIDler = new List<int>();
-                }
-                
-                <div>
 
-                    <label asp-for="@Model.EMKategoriler[i].SecilenEkstraMalzemeID">@Model.EMKategoriler[i].KategoriAdi</label>
-                    <select asp-for="@Model.SecilenEkstraMalzemeIDler[i]" name="Kategoriler[@i].SecilenMalzemeId" class="form-control" asp-items="Model.EMKategoriler[i].EkstraMalzemeler">
-                        <option value="">-- @Model.EMKategoriler[i].KategoriAdi --</option>
-
-                    </select>
-                </div>
-            } *@
-
-
-<p>Toplam Fiyat: @Model.ToplamFiyat </p>
-        <input type="submit" value="Sepete Ekle" class="btn btn-primary" />
+            <input type="submit" value="Sepete Ekle" class="btn btn-primary" />
 
         </div>
 
+
+
+       
+
     </div>
-    </div>
+
 </form>
