@@ -129,7 +129,16 @@ namespace MVC_Hamburger.Controllers
 
             return RedirectToAction("SepetListele", "Siparis");
         }
+        public IActionResult SepettenSil(int id)
+        {
+            var sepettekiSiparis = sepettekiSiparisler.FirstOrDefault(x=>x.SepetID==id);
+            sepettekiSiparisler.Remove(sepettekiSiparis);
+            return RedirectToAction("SepetListele", "Siparis");
+        }
 
+
+            
+       
         public IActionResult SepetListele(List<SepetDTO> siparisler)
         {
             siparisler = sepettekiSiparisler;
