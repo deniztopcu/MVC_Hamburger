@@ -74,7 +74,7 @@ namespace MVC_Hamburger.Controllers
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(uye, "Musteri");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Login");
             }
 
             return View();
