@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "SepetListele";
+    Layout = "_Layout2";
 }
 
 <h1>SepetListele</h1>
@@ -9,11 +10,11 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table table-striped table-hover ">
+    <thead >
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SiparisID)
+                @Html.DisplayNameFor(model => model.SepetID)
             </th>
             <th>
                 <p>Menü Adı</p>
@@ -48,7 +49,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SiparisID)
+                    @Html.DisplayFor(modelItem => item.SepetID)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SepetMenu.Ad)
@@ -68,7 +69,7 @@
                 </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.SiparisFiyati)
+                    @Html.DisplayFor(modelItem => item.SiparisFiyati) TL
                 </td>
 
                 <td>
@@ -78,6 +79,10 @@
                 </td>
             </tr>
         }
-        <P>Toplam Fiyat:@ViewBag.ToplamFiyat</P>
+        <P>Toplam Fiyat:@ViewBag.ToplamFiyat TL</P>
     </tbody>
 </table>
+
+<a class="btn btn-success" asp-controller="Siparis" asp-action="SiparisOnayla"></a>
+
+

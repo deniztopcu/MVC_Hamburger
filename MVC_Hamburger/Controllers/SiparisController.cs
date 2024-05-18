@@ -93,8 +93,10 @@ namespace MVC_Hamburger.Controllers
             foreach(var item in ekstraMalzemeler)
             {
                 if (emIdler.Contains(item.ID))
-                    emDetay += $"Seçilen {item.Kategori.KategoriAdi}:{item.Ad} Fiyat:{item.Fiyat}";
-                emToplam += item.Fiyat;
+                {
+                    emDetay += $" Seçilen {item.Kategori.KategoriAdi}:{item.Ad} Fiyat:{item.Fiyat.ToString("0.##")} TL";
+                    emToplam += item.Fiyat;
+                }
             }
 
             sepetDTO.EkstraMalzemeDetay= emDetay;
@@ -104,7 +106,7 @@ namespace MVC_Hamburger.Controllers
             
             sepetDTO.SepetMenu = _context.Menuler.Find(siparisVm.SecilenMenu.ID);
 
-            sepetDTO.SiparisID = siparisVm.SiparisVMID;
+            sepetDTO.SepetID = siparisVm.SiparisVMID;
 
             sepetDTO.SiparisFiyati = (sepetDTO.SepetMenu.Fiyat * sepetDTO.MenuAdedi) + emToplam;
 
@@ -132,14 +134,59 @@ namespace MVC_Hamburger.Controllers
         {
             siparisler = sepettekiSiparisler;
 
-            ViewBag.ToplamFiyat = 0;
+            decimal toplamFiyat= 0;
+            
 
             foreach (var item in siparisler) 
             { 
-                ViewBag.ToplamFiyat+=item.SiparisFiyati;
+
+                toplamFiyat+=item.SiparisFiyati;
             }
-            
+            ViewBag.ToplamFiyat= toplamFiyat.ToString("0.##");
             return View(siparisler);    
+        }
+
+        public IActionResult SiparisOnayla()
+        {
+
+            foreach (var item in sepettekiSiparisler)
+            {
+                Siparis yeniSiparis = new Siparis();
+                yeniSiparis.MenuID = item.SepetMenu.ID;
+                yeniSiparis.MenuAdedi = item.MenuAdedi;
+                yeniSiparis.ToplamFiyat = item.SiparisFiyati;
+                yeniSiparis.UyeID = item.UyeID;
+                yeniSiparis.Boy = item.SiparisBoyu;
+
+                // Önce Siparişi Ekle
+                _context.Siparisler.Add(yeniSiparis);
+                _context.SaveChanges(); // Bu aşamada ID değeri oluşturulmuş olacak
+
+                // Eklenen siparişin ID değerini kullanarak ekstra malzemeleri ekle
+                foreach (var emID in item.EkstraMalzemeIdler)
+                {
+                    SiparisEkstraMalzeme sem = new SiparisEkstraMalzeme();
+                    sem.SiparisID = yeniSiparis.ID;
+                    sem.EkstraMalzemeID = emID;
+                    _context.SiparisEkstraMalzemeler.Add(sem);
+                }
+
+                _context.SaveChanges(); // Ekstra malzemeleri kaydet
+            }
+
+            return RedirectToAction("Burgerler", "Home");
+        }
+
+        public IActionResult Siparislerim()
+        {
+
+            var uyeSiparisler = _context.Siparisler.Where(x=>x.UyeID==GetUserID()).ToList();
+            foreach(var item in uyeSiparisler)
+            {
+                item.Menu = _context.Menuler.Find(item.MenuID);
+                item.SiparisEkstraMalzemeler = _context.SiparisEkstraMalzemeler.Where(x => x.SiparisID == item.ID).ToList();
+            }
+            return View(uyeSiparisler);
         }
         public int GetUserID()
         {

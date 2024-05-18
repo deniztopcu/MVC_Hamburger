@@ -8,9 +8,9 @@ namespace MVC_Hamburger.DAL.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<SiparisEkstraMalzeme> builder)
         {
-            builder.HasKey(x => new { x.EkstraMalzemeID, x.SiparisID });
-            builder.HasOne(x => x.Siparis).WithMany(x => x.SiparisEkstraMalzemeler).HasForeignKey(x => x.SiparisID);
-            builder.HasOne(x => x.EkstraMalzeme).WithMany(x => x.SiparisEkstraMalzemeler).HasForeignKey(x => x.EkstraMalzemeID);
+            builder.HasKey(x => x.SiparisEkstraMalzemeID);
+            builder.HasOne(x => x.Siparis).WithMany(x => x.SiparisEkstraMalzemeler);
+            builder.HasOne(x => x.EkstraMalzeme).WithMany(x => x.SiparisEkstraMalzemeler);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace MVC_Hamburger.Models.ViewModels
 {
     public class SepetDTO
     {
-        public int SiparisID { get; set; }
+        public int SepetID { get; set; }
 
         public decimal SiparisFiyati { get; set; }  
 
@@ -18,6 +18,8 @@ namespace MVC_Hamburger.Models.ViewModels
         public Boy SiparisBoyu { get; set; }
 
         public Menu SepetMenu { get; set; }
+
+        public DateTime OlusturulmaTarihi { get; set; } = DateTime.Now;
 
         public int UyeID { get; set; }  
 
