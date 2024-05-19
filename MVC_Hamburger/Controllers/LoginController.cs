@@ -49,9 +49,7 @@ namespace MVC_Hamburger.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            //return RedirectToAction("Index", "Home");
             return Redirect("~/Login/Login");
-            //return LocalRedirect("~/localhost:5168/Home/Index");
         }
 
         public IActionResult Register()

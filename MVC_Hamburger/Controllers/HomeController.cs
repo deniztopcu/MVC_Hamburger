@@ -27,7 +27,6 @@ namespace MVC_Hamburger.Controllers
             
             return View();
         }
-
         public IActionResult Burgerler()
         {
 			menuVM.Menuler = _context.Menuler.ToList();

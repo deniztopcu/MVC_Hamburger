@@ -29,7 +29,6 @@ namespace MVC_Hamburger.Areas.YonetimPaneli.Controllers
 		}
 
 
-
 		// GET: YonetimPaneli/EkstraMalzeme
 		public async Task<IActionResult> Index()
         {

@@ -4,10 +4,10 @@
     Layout = "_AdminLayout";
 }
 
-<h3>Bunu Silmek İstediğine Emin Misin?</h3>
-<div>
-    <hr />
-    <dl class="row">
+<h3 class="bg-dark text-white m-0">Bunu Silmek İstediğine Emin Misin?</h3>
+<div class="bg-dark text-white m-0">
+    
+    <dl class="row m-0">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ResimYolu)
         </dt>
@@ -45,4 +45,3 @@
         <a asp-action="Index" class="btn btn-warning">Listeye Dön</a>
     </form>
 </div>
-<div asp-validation-summary="All" lang="tr"></div>

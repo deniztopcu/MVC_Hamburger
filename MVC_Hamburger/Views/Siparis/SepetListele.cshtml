@@ -5,10 +5,10 @@
     Layout = "_Layout2";
 }
 
-<h1>SepetListele</h1>
+<h1>Sepet</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Burgerler" asp-controller="Home" class="btn btn-warning">Yeni Sipariş Ver</a>
 </p>
 <table class="table table-striped table-hover ">
     <thead >
@@ -79,6 +79,6 @@
     </tbody>
 </table>
 
-<a class="btn btn-success" asp-controller="Siparis" asp-action="SiparisOnayla">Sipariş Ver</a>
+<a class="btn btn-success" asp-controller="Siparis" asp-action="SiparisOnayla" >Sipariş Ver</a>
 
 

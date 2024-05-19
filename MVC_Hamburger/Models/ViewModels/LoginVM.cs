@@ -1,4 +1,7 @@
-﻿namespace MVC_Hamburger.Models.ViewModels
+﻿using MVC_Hamburger.CustomValidations;
+using System.ComponentModel.DataAnnotations;
+
+namespace MVC_Hamburger.Models.ViewModels
 {
     public class LoginVM
     {

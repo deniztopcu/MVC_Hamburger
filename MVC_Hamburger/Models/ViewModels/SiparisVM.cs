@@ -9,8 +9,6 @@ namespace MVC_Hamburger.Models.ViewModels
         private static int _currentId = 0;
         public SiparisVM()
         {
-            //EMKategoriler = new List<EMKategoriVM>();
-            //SecilenEkstraMalzemeIDler = new List<str>();
             SiparisVMID = ++_currentId; 
         } 
         public int SiparisVMID { get; private set; }
@@ -23,7 +21,5 @@ namespace MVC_Hamburger.Models.ViewModels
         public Boy SecilenBoy { get; set; }
         public List<EMKategoriVM>? EMKategoriler { get; set; } = new List<EMKategoriVM>();
         public List<string> SecilenEkstraMalzemeIDler { get; set; } = new List<string>();
-
-        
     }
 }

@@ -8,6 +8,7 @@ namespace MVC_Hamburger.Models.Concrete
     {
         [Display(Name ="İçindekiler")]
         public string? Icerik { get; set; }
+        [Display(Name ="Menü Resmi")]
         public string? ResimYolu { get; set; }
         public ICollection<Siparis>? Siparisler { get; set; }
     }
