@@ -4,13 +4,22 @@
     ViewData["Title"] = "SepetListele";
     Layout = "_Layout2";
 }
+@{
+    if (TempData["SepetBos"] !=null)
+    {
+        <div class="alert alert-danger m-0"> @TempData["SepetBos"]</div>
+    }
+    if (TempData["SepetSil"]!=null)
+    {
+        <div class="alert alert-danger m-0"> @TempData["SepetSil"]</div>
+    }
+}
+<h1 class="bg-dark text-white m-0">Sepet</h1>
 
-<h1>Sepet</h1>
-
-<p>
-    <a asp-action="Burgerler" asp-controller="Home" class="btn btn-warning">Yeni Sipariş Ver</a>
+<p class="bg-dark text-white m-0">
+    <a asp-action="Burgerler" asp-controller="Home" class="btn btn-warning">Sepete Ürün Ekle</a>
 </p>
-<table class="table table-striped table-hover ">
+<table class="table table-dark table-hover m-0">
     <thead >
         <tr>
 
@@ -22,7 +31,7 @@
                 <p>Menü İçeriği</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MenuAdedi)
+                <p>Menü Adedi</p>
             </th>
             <th>
                 <p>Menü Boyu</p>
@@ -32,7 +41,7 @@
                 <p>Ekstra Malzemeler</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SiparisFiyati)
+                <p>Toplam Fiyatı</p>
             </th>
 
 
@@ -67,7 +76,7 @@
                 </td>
 
                 <td>
-                    <a class="btn btn-danger" asp-action="SepettenSil" asp-controller="Siparis" asp-route-id="@item.SepetID">Kaldır</a>
+                    <a class="btn btn-danger" asp-action="SepettenSil" asp-controller="Siparis" asp-route-id="@item.SepetID" onclick="return confirm('Ürünü sepetten çıkarmak istediğinize emin misiniz?');">Sepetten Çıkar</a>
                                       
                 </td>
                 <td>
@@ -75,10 +84,12 @@
                 </td>
             </tr>
         }
-        <P>Toplam Fiyat:@ViewBag.ToplamFiyat TL</P>
     </tbody>
 </table>
+<div class="row bg-dark text-white">
+<P class="alert alert-dark mr-1" style="width:200px">Sepet Tutarı:@ViewBag.ToplamFiyat TL</P>
+    <a class="alert ml-1 bg-success text-white" style="width:200px" asp-controller="Siparis" asp-action="SiparisOnayla" onclick="return confirm('Sepetteki ürünleri onaylıyor musunuz?');">Siparişi Onayla</a>
+</div>
 
-<a class="btn btn-success" asp-controller="Siparis" asp-action="SiparisOnayla" >Sipariş Ver</a>
 
 

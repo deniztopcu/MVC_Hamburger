@@ -11,6 +11,7 @@ namespace MVC_Hamburger.Models.ViewModels
         public string Adres { get; set; }
         [Sifre]
         public string Sifre { get; set; }
+        [Compare("Sifre",ErrorMessage ="Şifreler aynı olmalıdır.")]
         public string SifreTekrari { get; set; }
     }
 }

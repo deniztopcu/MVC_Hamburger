@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\YonetimPaneli\Data\**" />
     <Compile Remove="Models\DTOs\**" />
+    <Content Remove="Areas\YonetimPaneli\Data\**" />
     <Content Remove="Models\DTOs\**" />
+    <EmbeddedResource Remove="Areas\YonetimPaneli\Data\**" />
     <EmbeddedResource Remove="Models\DTOs\**" />
+    <None Remove="Areas\YonetimPaneli\Data\**" />
     <None Remove="Models\DTOs\**" />
   </ItemGroup>
 
@@ -23,10 +27,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\YonetimPaneli\Data\" />
   </ItemGroup>
 
   <ItemGroup>

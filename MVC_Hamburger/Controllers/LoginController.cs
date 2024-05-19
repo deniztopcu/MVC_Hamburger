@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MVC_Hamburger.DAL;
 using MVC_Hamburger.Models.Concrete;
 using MVC_Hamburger.Models.ViewModels;
 
@@ -9,11 +10,13 @@ namespace MVC_Hamburger.Controllers
     {
         private readonly SignInManager<Uye> _signInManager;
         private readonly UserManager<Uye> _userManager;
+        private readonly HamburgerDbContext _dbContext; 
 
-        public LoginController(SignInManager<Uye> signInManager, UserManager<Uye> userManager)
+        public LoginController(SignInManager<Uye> signInManager, UserManager<Uye> userManager, HamburgerDbContext dbContext)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _dbContext = dbContext;
         }
 
         public IActionResult Login()
@@ -24,24 +27,15 @@ namespace MVC_Hamburger.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM login)
         {
-            var uye = _userManager.FindByEmailAsync(login.Email).Result;
+            var uye = await _userManager.FindByEmailAsync(login.Email);
 
-            if (uye == null)
+            if (uye == null || !await _userManager.CheckPasswordAsync(uye, login.Sifre))
             {
-                //eposta kontrolu...
                 ModelState.AddModelError("Hata", "Kullanıcı adı veya şifre yanlış...");
-                return View();
-            }
-
-            if (!_userManager.CheckPasswordAsync(uye, login.Sifre).Result)
-            {
-                //sifre kontrolu...
-                ModelState.AddModelError("Hata", "Kullanıcı adı veya şifre yanlış...");
-                return View();
+                return View(login);
             }
 
             await _signInManager.SignInAsync(uye, false);
-
             return RedirectToAction("Index", "Home");
         }
 
@@ -60,7 +54,16 @@ namespace MVC_Hamburger.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM register)
         {
-            //ModelState.ISValid() kontrol et...
+            var usernames= _dbContext.Users.Select(x=>x.Email).ToList();
+            if (usernames.Contains(register.Email))
+            {
+                TempData["Hata"] = " Bu email daha önce kullanılmıştır";
+                return RedirectToAction("Register", "Login");
+            }
+            if(!ModelState.IsValid)
+            {
+                return View(register);
+            }
             Uye uye = new Uye();
             uye.Adres = register.Adres;
             uye.UserName = register.Email;
@@ -72,6 +75,7 @@ namespace MVC_Hamburger.Controllers
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(uye, "Musteri");
+                 TempData["Basarili"] = "Kayıt Başarılı";
                 return RedirectToAction("Login", "Login");
             }
 

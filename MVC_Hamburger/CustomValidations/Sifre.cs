@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace MVC_Hamburger.CustomValidations
 {
-    public class Sifre:ValidationAttribute
+    public class Sifre : ValidationAttribute
     {
         private const string DefaultErrorMessage = "Şifre Büyük harf, küçük harf, özel karakter ve rakam içermelidir ve boşluk içermemelidir!";
         public string ErrorMessage { get; set; }
@@ -20,17 +20,15 @@ namespace MVC_Hamburger.CustomValidations
             bool hasUpperCase = Regex.IsMatch(sifre, @"[A-Z]");
             bool hasLowerCase = Regex.IsMatch(sifre, @"[a-z]");
             bool hasDigit = Regex.IsMatch(sifre, @"\d");
-            bool hasSpecialChar = Regex.IsMatch(sifre, @"[!@#$%^&*(),.?""{}|<>]");
+            bool hasSpecialChar = Regex.IsMatch(sifre, @"[!_@#$%^&*(),.?""{}|<>]");
             bool hasNoSpaces = !sifre.Contains(" ");
 
-            if (hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar && hasNoSpaces)
-            {
-                return ValidationResult.Success;
-            }
-            else
+            if ((hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar && hasNoSpaces)==false)
             {
                 return new ValidationResult(ErrorMessage ?? DefaultErrorMessage);
             }
+            return ValidationResult.Success;
+
         }
     }
 }

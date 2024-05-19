@@ -4,15 +4,16 @@
 @{
     Layout = "_Layout2";
 }
-<form asp-action="SepeteEkle" method="post" class="container" enctype="multipart/form-data">
-    <div class="row">
+<div class="row bg-dark text-white m-0">
+<form asp-action="SepeteEkle" method="post" class="container bg-dark" enctype="multipart/form-data">
+    <div class="row bg-dark text-white m-0">
         <!-- Sol tarafta menü listesi -->
 
 
         <div class="col-md-6">
             <h2>MENÜ</h2>
-            <div>
-                <img src="~/MenuResimleri/@Model.GelenMenu?.MenuResimYolu" width="100%" height="350px">
+            <div >
+                <img src="~/MenuResimleri/@Model.GelenMenu?.MenuResimYolu" width="100%" height="250px">
 
                 <label asp-for="SecilenMenu.Ad" class="control-label">Seçilen Menü </label>
                 <select asp-for="SecilenMenu.ID" class="form-control" asp-items="@Model.GelenMenulerSL"></select>
@@ -70,11 +71,6 @@
             <input type="submit" value="Sepete Ekle" class="btn btn-primary" />
 
         </div>
-
-
-
-       
-
     </div>
-
 </form>
+</div>

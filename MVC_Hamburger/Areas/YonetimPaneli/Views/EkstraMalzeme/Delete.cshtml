@@ -6,10 +6,9 @@
 
 
 
-<h3>Bunu Silmek İstediğine Emin Misin?</h3>
-<div>
-    <hr />
-    <dl class="row ml-5">
+<h3 class="bg-dark text-white m-0">Bunu Silmek İstediğine Emin Misin?</h3>
+<div class="bg-dark text-white m-0">
+    <dl class="row m-0">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Kategori)
         </dt>
@@ -30,7 +29,7 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="Delete" class="bg-dark text-white m-0">
         <input type="hidden" asp-for="ID" />
         <input type="submit" value="Sil" class="btn btn-danger" /> |
         <a asp-action="Index" class="btn btn-warning">Listeye Geri Dön</a>
