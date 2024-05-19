@@ -4,12 +4,10 @@
     Layout = "_AdminLayout";
 }
 
-<h1>Details</h1>
+<h1 class="bg-dark text-white m-0">Detaylar</h1>
 
-<div>
-    <h4>Kategori</h4>
-    <hr />
-    <dl class="row">
+<div class="bg-dark text-white m-0">
+    <dl class="row m-0">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.KategoriAdi)
         </dt>
@@ -18,7 +16,7 @@
         </dd>
     </dl>
 </div>
-<div>
+<div class="bg-dark text-white m-0">
     <a asp-action="Edit" asp-route-id="@Model?.KategoriID" class="btn btn-warning">Düzenle</a> |
     <a asp-action="Index" class="btn btn-warning">Listeye Geri Dön</a>
 </div>

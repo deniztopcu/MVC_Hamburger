@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_Hamburger.Migrations
 {
     [DbContext(typeof(HamburgerDbContext))]
-    [Migration("20240517161435_InitDB5")]
-    partial class InitDB5
+    [Migration("20240519154226_initialDb")]
+    partial class initialDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,10 +53,157 @@ namespace MVC_Hamburger.Migrations
                     b.HasData(
                         new
                         {
-                            ID = 3,
+                            ID = 1,
                             Ad = "Sos İstemiyorum",
                             Fiyat = 0m,
                             KategoriID = 3
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Ad = "Ketçap",
+                            Fiyat = 10m,
+                            KategoriID = 3
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Ad = "Mayonez",
+                            Fiyat = 10m,
+                            KategoriID = 3
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Ad = "Hardal",
+                            Fiyat = 10m,
+                            KategoriID = 3
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Ad = "Barbekü",
+                            Fiyat = 10m,
+                            KategoriID = 3
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Ad = "Coca Cola",
+                            Fiyat = 0m,
+                            KategoriID = 1
+                        },
+                        new
+                        {
+                            ID = 7,
+                            Ad = "Fanta",
+                            Fiyat = 0m,
+                            KategoriID = 1
+                        },
+                        new
+                        {
+                            ID = 8,
+                            Ad = "Sprite",
+                            Fiyat = 0m,
+                            KategoriID = 1
+                        },
+                        new
+                        {
+                            ID = 9,
+                            Ad = "Ice Tea",
+                            Fiyat = 0m,
+                            KategoriID = 1
+                        },
+                        new
+                        {
+                            ID = 10,
+                            Ad = "Ayran",
+                            Fiyat = 0m,
+                            KategoriID = 1
+                        },
+                        new
+                        {
+                            ID = 11,
+                            Ad = "Su",
+                            Fiyat = 0m,
+                            KategoriID = 1
+                        },
+                        new
+                        {
+                            ID = 12,
+                            Ad = "Soda",
+                            Fiyat = 0m,
+                            KategoriID = 1
+                        },
+                        new
+                        {
+                            ID = 13,
+                            Ad = "Limonata",
+                            Fiyat = 0m,
+                            KategoriID = 1
+                        },
+                        new
+                        {
+                            ID = 14,
+                            Ad = "Ekstra Çıtır Lezzet Istemiyorum",
+                            Fiyat = 0m,
+                            KategoriID = 4
+                        },
+                        new
+                        {
+                            ID = 15,
+                            Ad = "Soğan Halkası 6'lı",
+                            Fiyat = 30m,
+                            KategoriID = 4
+                        },
+                        new
+                        {
+                            ID = 16,
+                            Ad = "Soğan Halkası 12'li",
+                            Fiyat = 50m,
+                            KategoriID = 4
+                        },
+                        new
+                        {
+                            ID = 17,
+                            Ad = "Nugget 6'lı",
+                            Fiyat = 40m,
+                            KategoriID = 4
+                        },
+                        new
+                        {
+                            ID = 18,
+                            Ad = "Nugget 12'li",
+                            Fiyat = 60m,
+                            KategoriID = 4
+                        },
+                        new
+                        {
+                            ID = 19,
+                            Ad = "Ekstra Tatlı Istemiyorum",
+                            Fiyat = 0m,
+                            KategoriID = 2
+                        },
+                        new
+                        {
+                            ID = 20,
+                            Ad = "Sufle",
+                            Fiyat = 40m,
+                            KategoriID = 2
+                        },
+                        new
+                        {
+                            ID = 21,
+                            Ad = "Donut",
+                            Fiyat = 30m,
+                            KategoriID = 2
+                        },
+                        new
+                        {
+                            ID = 22,
+                            Ad = "Dondurma",
+                            Fiyat = 20m,
+                            KategoriID = 2
                         });
                 });
 
@@ -109,7 +256,7 @@ namespace MVC_Hamburger.Migrations
 
                     b.Property<string>("Ad")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(150)
                         .HasColumnType("varchar");
 
                     b.Property<decimal>("Fiyat")
@@ -131,16 +278,50 @@ namespace MVC_Hamburger.Migrations
                         new
                         {
                             ID = 1,
-                            Ad = "hamburger",
-                            Fiyat = 159m,
-                            ResimYolu = "sfdsfa"
+                            Ad = "Etli Barbeku Menü",
+                            Fiyat = 200m,
+                            Icerik = "Etli Barbekü Burger, Patates Kızartması (Küçük),Kutu İçecek",
+                            ResimYolu = "1_etlibarbeku_menu.png"
                         },
                         new
                         {
                             ID = 2,
-                            Ad = "burger",
-                            Fiyat = 169m,
-                            ResimYolu = "sfdsfa"
+                            Ad = "Big Burger Menü",
+                            Fiyat = 250m,
+                            Icerik = "Big Burger, Patates Kızartması (Küçük), Kutu İçecek",
+                            ResimYolu = "2_ozelbig_menu.png"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Ad = "Süper Chicken Menü",
+                            Fiyat = 230m,
+                            Icerik = "Süper Chicken Burger, Patates Kızartması (Küçük),Kutu İçecek, Soğan Halkası 6'lı",
+                            ResimYolu = "8_superchicken_menu.png"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Ad = "İkili Burger Menü",
+                            Fiyat = 380m,
+                            Icerik = "Big Burger, Süper Chicken Burger,Patates Kızartması (Küçük), 1 L. İçecek",
+                            ResimYolu = "5_ikiliburger.png"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Ad = "Üçlü Whopper Burger Menü",
+                            Fiyat = 600m,
+                            Icerik = "3X Whopper Burger,Patates Kızartması (Küçük), 1 L. İçecek",
+                            ResimYolu = "3_3luwhopper.png"
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Ad = "Üçlü Burger Menü",
+                            Fiyat = 550m,
+                            Icerik = "3X Süper Chicken Burger, Patates Kızartması (Küçük), 1 L. İçecek",
+                            ResimYolu = "7_benimuclum.png"
                         });
                 });
 
@@ -177,14 +358,14 @@ namespace MVC_Hamburger.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "90ae0aad-e0f7-4207-8cc4-0b0af066ebe9",
+                            ConcurrencyStamp = "6be3e8f3-4757-4725-98b6-130e92ca679d",
                             Name = "Yonetici",
                             NormalizedName = "YONETICI"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "df4678a4-0a6c-4855-ac0b-a0973db200e0",
+                            ConcurrencyStamp = "235faa40-b64b-48e8-8a70-9038685c4ce4",
                             Name = "Musteri",
                             NormalizedName = "MUSTERI"
                         });
@@ -228,16 +409,24 @@ namespace MVC_Hamburger.Migrations
 
             modelBuilder.Entity("MVC_Hamburger.Models.Concrete.SiparisEkstraMalzeme", b =>
                 {
+                    b.Property<int>("SiparisEkstraMalzemeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SiparisEkstraMalzemeID"));
+
+                    b.Property<int>("EkstraMalzemeAdedi")
+                        .HasColumnType("int");
+
                     b.Property<int>("EkstraMalzemeID")
                         .HasColumnType("int");
 
                     b.Property<int>("SiparisID")
                         .HasColumnType("int");
 
-                    b.Property<int>("EkstraMalzemeAdedi")
-                        .HasColumnType("int");
+                    b.HasKey("SiparisEkstraMalzemeID");
 
-                    b.HasKey("EkstraMalzemeID", "SiparisID");
+                    b.HasIndex("EkstraMalzemeID");
 
                     b.HasIndex("SiparisID");
 
@@ -321,15 +510,15 @@ namespace MVC_Hamburger.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Adres = "Istanbul",
-                            ConcurrencyStamp = "ef481c2d-ffbe-49c8-ab94-130aa43dc7b2",
+                            ConcurrencyStamp = "edf712d1-747c-45c8-afcf-5cb734bebbcb",
                             Email = "deniz@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DENIZ@ADMIN.COM",
                             NormalizedUserName = "DENIZ@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECD3zWDY9ShOMM0oCkSaZwaZj1PjJWWrlpbADP9MK/FU+LJD5C2YZcx5Mw8M3h5IhQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDi2qWQQHf4mBbenliUsucZo2V1JUBFamFGrh46heho8oB0G6qaN+fND1dmOCq8mpw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4de22376-8246-4401-a45e-fa1764f27d56",
+                            SecurityStamp = "fd9d8b71-3e2a-425c-ba3e-52d4484caab5",
                             TwoFactorEnabled = false,
                             UserName = "deniz@admin.com"
                         },
@@ -338,15 +527,15 @@ namespace MVC_Hamburger.Migrations
                             Id = 2,
                             AccessFailedCount = 0,
                             Adres = "Istanbul",
-                            ConcurrencyStamp = "9b87438f-dd73-40b5-97ce-c6bdeae0dac3",
+                            ConcurrencyStamp = "8045a0ac-543b-4f71-846f-4a7352bc16b9",
                             Email = "cemre@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "CEMRE@ADMIN.COM",
                             NormalizedUserName = "CEMRE@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN079dGDWq0qDBOTjWBg7QSCYkIGVt1prQkRhOFYTRYhFW42YI08Gxi86rfrdceBLw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED5C/SzV3NKn4GpccavedaExV2bL224f9fkSOtQUbfUATu9GEHJ3KB93pcvKYJVEWA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ebad3fb0-6994-4f11-9d1e-3e4e505dc4cd",
+                            SecurityStamp = "b65fae0e-893b-43c0-83b9-4ded479de1ec",
                             TwoFactorEnabled = false,
                             UserName = "cemre@admin.com"
                         },
@@ -355,15 +544,15 @@ namespace MVC_Hamburger.Migrations
                             Id = 3,
                             AccessFailedCount = 0,
                             Adres = "Istanbul",
-                            ConcurrencyStamp = "62f4f2b8-1ba0-4795-81f0-12d7e4f55bab",
+                            ConcurrencyStamp = "229f3040-cb23-4a7d-926a-e490a3026277",
                             Email = "onur@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ONUR@ADMIN.COM",
                             NormalizedUserName = "ONUR@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJmHoVSjaYVP+E56KoptuvNFBZeTQdUmeWqShHCOpBRv18k4hDpp04AFCwHo75WeAQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKohXNax98FQl/UW1SOvy8LFDsHb/kPus9hKEsTWVU2KTs/NI4FtCi7njLwt0EszEQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cc952fff-4440-4946-976a-e15df63630b3",
+                            SecurityStamp = "207f6093-6af8-43ae-8709-8dad493dd5da",
                             TwoFactorEnabled = false,
                             UserName = "onur@admin.com"
                         });

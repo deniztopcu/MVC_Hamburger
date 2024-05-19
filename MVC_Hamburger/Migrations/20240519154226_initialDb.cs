@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MVC_Hamburger.Migrations
 {
     /// <inheritdoc />
-    public partial class initDB : Migration
+    public partial class initialDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -69,30 +69,15 @@ namespace MVC_Hamburger.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LoginVM",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Sifre = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LoginVM", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Menuler",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ResimYolu = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    Boy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Ad = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    Fiyat = table.Column<decimal>(type: "money", nullable: false),
-                    MenuAdet = table.Column<int>(type: "int", nullable: false)
+                    Icerik = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: true),
+                    ResimYolu = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
+                    Ad = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false),
+                    Fiyat = table.Column<decimal>(type: "money", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -206,28 +191,6 @@ namespace MVC_Hamburger.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Siparisler",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MenuAdet = table.Column<int>(type: "int", nullable: false),
-                    ToplamFiyat = table.Column<decimal>(type: "money", nullable: false),
-                    OlusturulmaTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UyeID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Siparisler", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Siparisler_AspNetUsers_UyeID",
-                        column: x => x.UyeID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "EkstraMalzemeler",
                 columns: table => new
                 {
@@ -235,8 +198,7 @@ namespace MVC_Hamburger.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     KategoriID = table.Column<int>(type: "int", nullable: false),
                     Ad = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    Fiyat = table.Column<decimal>(type: "money", nullable: false),
-                    MenuAdet = table.Column<int>(type: "int", nullable: false)
+                    Fiyat = table.Column<decimal>(type: "money", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -250,49 +212,58 @@ namespace MVC_Hamburger.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SiparisMenuler",
+                name: "Siparisler",
                 columns: table => new
                 {
-                    SiparisID = table.Column<int>(type: "int", nullable: false),
-                    MenuID = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ToplamFiyat = table.Column<decimal>(type: "money", nullable: false),
+                    OlusturulmaTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Boy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UyeID = table.Column<int>(type: "int", nullable: false),
+                    MenuID = table.Column<int>(type: "int", nullable: false),
+                    MenuAdedi = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SiparisMenuler", x => new { x.SiparisID, x.MenuID });
+                    table.PrimaryKey("PK_Siparisler", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_SiparisMenuler_Menuler_MenuID",
-                        column: x => x.MenuID,
-                        principalTable: "Menuler",
-                        principalColumn: "ID",
+                        name: "FK_Siparisler_AspNetUsers_UyeID",
+                        column: x => x.UyeID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SiparisMenuler_Siparisler_SiparisID",
-                        column: x => x.SiparisID,
-                        principalTable: "Siparisler",
+                        name: "FK_Siparisler_Menuler_MenuID",
+                        column: x => x.MenuID,
+                        principalTable: "Menuler",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EkstraMalzemeMenuler",
+                name: "SiparisEkstraMalzemeler",
                 columns: table => new
                 {
+                    SiparisEkstraMalzemeID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     EkstraMalzemeID = table.Column<int>(type: "int", nullable: false),
-                    MenuID = table.Column<int>(type: "int", nullable: false)
+                    SiparisID = table.Column<int>(type: "int", nullable: false),
+                    EkstraMalzemeAdedi = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EkstraMalzemeMenuler", x => new { x.EkstraMalzemeID, x.MenuID });
+                    table.PrimaryKey("PK_SiparisEkstraMalzemeler", x => x.SiparisEkstraMalzemeID);
                     table.ForeignKey(
-                        name: "FK_EkstraMalzemeMenuler_EkstraMalzemeler_EkstraMalzemeID",
+                        name: "FK_SiparisEkstraMalzemeler_EkstraMalzemeler_EkstraMalzemeID",
                         column: x => x.EkstraMalzemeID,
                         principalTable: "EkstraMalzemeler",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EkstraMalzemeMenuler_Menuler_MenuID",
-                        column: x => x.MenuID,
-                        principalTable: "Menuler",
+                        name: "FK_SiparisEkstraMalzemeler_Siparisler_SiparisID",
+                        column: x => x.SiparisID,
+                        principalTable: "Siparisler",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -302,8 +273,8 @@ namespace MVC_Hamburger.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "a31a51f9-bee5-4d94-94db-1521d77bd9e2", "Yonetici", "YONETICI" },
-                    { 2, "e51b5361-e994-4980-99f9-3e20702e888f", "Musteri", "MUSTERI" }
+                    { 1, "6be3e8f3-4757-4725-98b6-130e92ca679d", "Yonetici", "YONETICI" },
+                    { 2, "235faa40-b64b-48e8-8a70-9038685c4ce4", "Musteri", "MUSTERI" }
                 });
 
             migrationBuilder.InsertData(
@@ -311,9 +282,33 @@ namespace MVC_Hamburger.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Adres", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "Istanbul", "63d69a10-c748-4797-a96b-9ff548f2b1ec", "deniz@admin.com", false, false, null, "DENIZ@ADMIN.COM", "DENIZ@ADMIN.COM", "AQAAAAIAAYagAAAAEPloBVTOvz3oyOdlaSU+o6w5NIBtSGAcke/atE2N7k3hxmcoOEwTqzKP0ahL4Pa/SA==", null, false, "479d41e2-3a20-48a4-a429-5fe5edb6034c", false, "deniz@admin.com" },
-                    { 2, 0, "Istanbul", "0e7d220a-7ef0-4474-aa28-51a02b319747", "cemre@admin.com", false, false, null, "CEMRE@ADMIN.COM", "CEMRE@ADMIN.COM", "AQAAAAIAAYagAAAAEBI/fjgodLgcwn8jWUd/pz1Fr108/9jDNo5YP6G7ojJbtMnai2RKSxo0pV8FNX37Eg==", null, false, "4241f8b3-5689-4aa2-83ce-5e2c7b8d102a", false, "cemre@admin.com" },
-                    { 3, 0, "Istanbul", "a09fd86e-60dd-4750-a15a-4c75b7217b4a", "onur@admin.com", false, false, null, "ONUR@ADMIN.COM", "ONUR@ADMIN.COM", "AQAAAAIAAYagAAAAEL24lVPwW6skaMYJePq7XK6RWtoDx8prYIo6YjqrHjtFFsV6kL2J4IndkNbB5JTA3Q==", null, false, "db5d0f7a-4118-4d01-8724-4094eb9b302d", false, "onur@admin.com" }
+                    { 1, 0, "Istanbul", "edf712d1-747c-45c8-afcf-5cb734bebbcb", "deniz@admin.com", false, false, null, "DENIZ@ADMIN.COM", "DENIZ@ADMIN.COM", "AQAAAAIAAYagAAAAEDi2qWQQHf4mBbenliUsucZo2V1JUBFamFGrh46heho8oB0G6qaN+fND1dmOCq8mpw==", null, false, "fd9d8b71-3e2a-425c-ba3e-52d4484caab5", false, "deniz@admin.com" },
+                    { 2, 0, "Istanbul", "8045a0ac-543b-4f71-846f-4a7352bc16b9", "cemre@admin.com", false, false, null, "CEMRE@ADMIN.COM", "CEMRE@ADMIN.COM", "AQAAAAIAAYagAAAAED5C/SzV3NKn4GpccavedaExV2bL224f9fkSOtQUbfUATu9GEHJ3KB93pcvKYJVEWA==", null, false, "b65fae0e-893b-43c0-83b9-4ded479de1ec", false, "cemre@admin.com" },
+                    { 3, 0, "Istanbul", "229f3040-cb23-4a7d-926a-e490a3026277", "onur@admin.com", false, false, null, "ONUR@ADMIN.COM", "ONUR@ADMIN.COM", "AQAAAAIAAYagAAAAEKohXNax98FQl/UW1SOvy8LFDsHb/kPus9hKEsTWVU2KTs/NI4FtCi7njLwt0EszEQ==", null, false, "207f6093-6af8-43ae-8709-8dad493dd5da", false, "onur@admin.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Kategoriler",
+                columns: new[] { "KategoriID", "KategoriAdi" },
+                values: new object[,]
+                {
+                    { 1, "İçecek" },
+                    { 2, "Tatlı" },
+                    { 3, "Sos" },
+                    { 4, "Çıtır Lezzetler" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Menuler",
+                columns: new[] { "ID", "Ad", "Fiyat", "Icerik", "ResimYolu" },
+                values: new object[,]
+                {
+                    { 1, "Etli Barbeku Menü", 200m, "Etli Barbekü Burger, Patates Kızartması (Küçük),Kutu İçecek", "1_etlibarbeku_menu.png" },
+                    { 2, "Big Burger Menü", 250m, "Big Burger, Patates Kızartması (Küçük), Kutu İçecek", "2_ozelbig_menu.png" },
+                    { 3, "Süper Chicken Menü", 230m, "Süper Chicken Burger, Patates Kızartması (Küçük),Kutu İçecek, Soğan Halkası 6'lı", "8_superchicken_menu.png" },
+                    { 4, "İkili Burger Menü", 380m, "Big Burger, Süper Chicken Burger,Patates Kızartması (Küçük), 1 L. İçecek", "5_ikiliburger.png" },
+                    { 5, "Üçlü Whopper Burger Menü", 600m, "3X Whopper Burger,Patates Kızartması (Küçük), 1 L. İçecek", "3_3luwhopper.png" },
+                    { 6, "Üçlü Burger Menü", 550m, "3X Süper Chicken Burger, Patates Kızartması (Küçük), 1 L. İçecek", "7_benimuclum.png" }
                 });
 
             migrationBuilder.InsertData(
@@ -324,6 +319,35 @@ namespace MVC_Hamburger.Migrations
                     { 1, 1 },
                     { 1, 2 },
                     { 1, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "EkstraMalzemeler",
+                columns: new[] { "ID", "Ad", "Fiyat", "KategoriID" },
+                values: new object[,]
+                {
+                    { 1, "Sos İstemiyorum", 0m, 3 },
+                    { 2, "Ketçap", 10m, 3 },
+                    { 3, "Mayonez", 10m, 3 },
+                    { 4, "Hardal", 10m, 3 },
+                    { 5, "Barbekü", 10m, 3 },
+                    { 6, "Coca Cola", 0m, 1 },
+                    { 7, "Fanta", 0m, 1 },
+                    { 8, "Sprite", 0m, 1 },
+                    { 9, "Ice Tea", 0m, 1 },
+                    { 10, "Ayran", 0m, 1 },
+                    { 11, "Su", 0m, 1 },
+                    { 12, "Soda", 0m, 1 },
+                    { 13, "Limonata", 0m, 1 },
+                    { 14, "Ekstra Çıtır Lezzet Istemiyorum", 0m, 4 },
+                    { 15, "Soğan Halkası 6'lı", 30m, 4 },
+                    { 16, "Soğan Halkası 12'li", 50m, 4 },
+                    { 17, "Nugget 6'lı", 40m, 4 },
+                    { 18, "Nugget 12'li", 60m, 4 },
+                    { 19, "Ekstra Tatlı Istemiyorum", 0m, 2 },
+                    { 20, "Sufle", 40m, 2 },
+                    { 21, "Donut", 30m, 2 },
+                    { 22, "Dondurma", 20m, 2 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -371,19 +395,24 @@ namespace MVC_Hamburger.Migrations
                 column: "KategoriID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EkstraMalzemeMenuler_MenuID",
-                table: "EkstraMalzemeMenuler",
+                name: "IX_SiparisEkstraMalzemeler_EkstraMalzemeID",
+                table: "SiparisEkstraMalzemeler",
+                column: "EkstraMalzemeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SiparisEkstraMalzemeler_SiparisID",
+                table: "SiparisEkstraMalzemeler",
+                column: "SiparisID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Siparisler_MenuID",
+                table: "Siparisler",
                 column: "MenuID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Siparisler_UyeID",
                 table: "Siparisler",
                 column: "UyeID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SiparisMenuler_MenuID",
-                table: "SiparisMenuler",
-                column: "MenuID");
         }
 
         /// <inheritdoc />
@@ -405,22 +434,13 @@ namespace MVC_Hamburger.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "EkstraMalzemeMenuler");
-
-            migrationBuilder.DropTable(
-                name: "LoginVM");
-
-            migrationBuilder.DropTable(
-                name: "SiparisMenuler");
+                name: "SiparisEkstraMalzemeler");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "EkstraMalzemeler");
-
-            migrationBuilder.DropTable(
-                name: "Menuler");
 
             migrationBuilder.DropTable(
                 name: "Siparisler");
@@ -430,6 +450,9 @@ namespace MVC_Hamburger.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Menuler");
         }
     }
 }

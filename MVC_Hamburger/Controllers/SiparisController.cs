@@ -125,6 +125,7 @@ namespace MVC_Hamburger.Controllers
         {
             var sepettekiSiparis = sepettekiSiparisler.Where(x => x.UyeID == GetUserID()).FirstOrDefault(x => x.SepetID == id);
             sepettekiSiparisler.Remove(sepettekiSiparis);
+            TempData["SepetSil"] = "Seçili ürün sepetten çıkarılmıştır.";
             return RedirectToAction("SepetListele", "Siparis");
         }
 
@@ -145,31 +146,40 @@ namespace MVC_Hamburger.Controllers
 
         public IActionResult SiparisOnayla()
         {
-
-            foreach (var item in sepettekiSiparisler.Where(x=>x.UyeID==GetUserID()))
+            if(sepettekiSiparisler.Where(x => x.UyeID == GetUserID()).Count()!=0)
             {
-                Siparis yeniSiparis = new Siparis();
-                yeniSiparis.MenuID = item.SepetMenu.ID;
-                yeniSiparis.MenuAdedi = item.MenuAdedi;
-                yeniSiparis.ToplamFiyat = item.SiparisFiyati;
-                yeniSiparis.UyeID = item.UyeID;
-                yeniSiparis.Boy = item.SiparisBoyu;
-
-                _context.Siparisler.Add(yeniSiparis);
-                _context.SaveChanges();
-
-                foreach (var emID in item.EkstraMalzemeIdler)
+                string siparisIdler = "";
+                foreach (var item in sepettekiSiparisler.Where(x => x.UyeID == GetUserID()))
                 {
-                    SiparisEkstraMalzeme sem = new SiparisEkstraMalzeme();
-                    sem.SiparisID = yeniSiparis.ID;
-                    sem.EkstraMalzemeID = emID;
-                    _context.SiparisEkstraMalzemeler.Add(sem);
-                }
+                    Siparis yeniSiparis = new Siparis();
+                    yeniSiparis.MenuID = item.SepetMenu.ID;
+                    yeniSiparis.MenuAdedi = item.MenuAdedi;
+                    yeniSiparis.ToplamFiyat = item.SiparisFiyati;
+                    yeniSiparis.UyeID = item.UyeID;
+                    yeniSiparis.Boy = item.SiparisBoyu;
+                   
+                    _context.Siparisler.Add(yeniSiparis);
+                    _context.SaveChanges();
+                    siparisIdler += $"{yeniSiparis.ID},";
+                    foreach (var emID in item.EkstraMalzemeIdler)
+                    {
+                        SiparisEkstraMalzeme sem = new SiparisEkstraMalzeme();
+                        sem.SiparisID = yeniSiparis.ID;
+                        sem.EkstraMalzemeID = emID;
+                        _context.SiparisEkstraMalzemeler.Add(sem);
+                    }
 
-                _context.SaveChanges();
-                  
+                    _context.SaveChanges();
+
+                }
+                TempData["SiparisOnay"] = $"{siparisIdler} numaralı sipariş / siparişler onaylanmıştır.";
+                sepettekiSiparisler.RemoveAll(x => x.UyeID == GetUserID());
             }
-            sepettekiSiparisler.RemoveAll(x => x.UyeID == GetUserID());
+            else
+            {
+                TempData["SepetBos"] = "Sepette ürün bulunmamaktadır!";
+                return RedirectToAction(nameof(SepetListele));
+            }
             return RedirectToAction("Siparislerim", "Siparis");
         }
 
